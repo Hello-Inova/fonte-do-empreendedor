@@ -14,9 +14,6 @@
 .access-kicker{margin:0 0 18px;color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.2em}
 .access-modal h2{font-size:clamp(2.5rem,8vw,4rem);line-height:.98;letter-spacing:-.05em}
 .access-intro{margin:20px 0 28px;color:var(--muted);line-height:1.6}
-.access-roles{display:grid;grid-template-columns:1fr 1fr;margin-bottom:26px;border:1px solid var(--line);padding:4px}
-.access-roles button{border:0;padding:13px;background:transparent;color:#a6a39d;font:600 12px "DM Sans",sans-serif;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:.25s}
-.access-roles button.active{background:var(--gold);color:var(--ink)}
 .access-form{display:grid;gap:18px}
 .access-form label{display:grid;gap:9px;color:#c8c5bd;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
 .access-form input{width:100%;border:1px solid var(--line);border-radius:0;background:#0b0b0c;color:#fff;padding:15px 16px;font:15px "DM Sans",sans-serif;outline:none;transition:.25s}

@@ -81,8 +81,6 @@ const accessTrigger=document.querySelector('.access-trigger');
 const accessModal=document.querySelector('#access-modal');
 if(accessTrigger&&accessModal){
   const closeButton=accessModal.querySelector('.access-close');
-  const roleButtons=[...accessModal.querySelectorAll('[data-role]')];
-  const roleInput=accessModal.querySelector('input[name="perfil"]');
   const accessForm=accessModal.querySelector('.access-form');
   const accessStatus=accessModal.querySelector('.access-status');
 
@@ -109,13 +107,8 @@ if(accessTrigger&&accessModal){
   closeButton.addEventListener('click',closeAccessModal);
   accessModal.addEventListener('click',event=>{if(event.target===accessModal)closeAccessModal()});
   accessModal.addEventListener('close',()=>document.body.classList.remove('modal-open'));
-  roleButtons.forEach(button=>button.addEventListener('click',()=>{
-    roleButtons.forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active))});
-    roleInput.value=button.dataset.role;
-    accessStatus.textContent='';
-  }));
   accessForm.addEventListener('submit',event=>{
     event.preventDefault();
-    accessStatus.textContent=`Acesso de ${roleInput.value} preparado. A autenticação será liberada quando a área restrita estiver conectada.`;
+    accessStatus.textContent='Acesso preparado. A autenticação e a identificação automática do perfil serão liberadas quando a área restrita estiver conectada.';
   });
 }
