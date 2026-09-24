@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Painel — A Fonte do Empreendedor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-redondo.png">
+  <link rel="stylesheet" href="assets/dashboard.css">
+</head>
+<body class="dashboard-loading">
+  <div class="mobile-overlay" data-close-menu></div>
+  <aside class="sidebar" id="dashboard-menu" aria-label="Menu principal">
+    <a class="dashboard-brand" href="dashboard.html"><img src="assets/logo-oficial.png" alt=""><span>A Fonte<small>do Empreendedor</small></span></a>
+    <nav>
+      <a class="active" href="#visao-geral" aria-current="page"><span>01</span>Visão geral</a>
+      <a href="#parceiros"><span>02</span>Parceiros</a>
+      <a href="#depoimentos"><span>03</span>Depoimentos</a>
+      <a href="#avaliacoes"><span>04</span>Avaliações</a>
+      <a href="#configuracoes"><span>05</span>Configurações</a>
+    </nav>
+    <div class="sidebar-footer"><span class="status-dot"></span><span>Sistema conectado</span></div>
+  </aside>
+
+  <main class="dashboard-main">
+    <header class="dashboard-topbar">
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="dashboard-menu"><span></span><span></span><span></span></button>
+      <div><p>Área administrativa</p><h1>Visão geral</h1></div>
+      <div class="account-menu"><span class="account-avatar">AF</span><div><strong data-user-name>Administrador</strong><small data-user-role>Carregando…</small></div><button class="logout-button" type="button">Sair</button></div>
+    </header>
+
+    <section class="dashboard-content" id="visao-geral">
+      <div class="welcome-panel">
+        <div><p class="eyebrow">Painel da comunidade</p><h2>Olá, <span data-user-greeting>Administrador</span>.</h2><p>Acompanhe os principais sinais da Fonte e mantenha as conexões em movimento.</p></div>
+        <a href="/#parceiros">Ver página pública <span>↗</span></a>
+      </div>
+
+      <div class="metric-grid" aria-label="Indicadores principais">
+        <article><span>Parceiros</span><strong>—</strong><small>Aguardando integração</small></article>
+        <article><span>Depoimentos</span><strong>—</strong><small>Aguardando integração</small></article>
+        <article><span>Avaliação média</span><strong>—</strong><small>Aguardando integração</small></article>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-card" id="parceiros"><div class="card-head"><div><p>Rede de parceiros</p><h3>Conexões recentes</h3></div><button type="button" disabled>Novo parceiro</button></div><div class="empty-state"><span>◎</span><h4>Nenhum parceiro cadastrado</h4><p>Os novos cadastros aparecerão aqui quando o formulário de parceria for conectado.</p></div></section>
+        <section class="dashboard-card activity-card"><div class="card-head"><div><p>Atividade</p><h3>Últimos movimentos</h3></div></div><ol><li><span></span><div><strong>Painel ativado</strong><small>Agora</small></div></li><li><span></span><div><strong>Conta administrativa pronta</strong><small>Primeiro acesso</small></div></li><li><span></span><div><strong>Banco Neon preparado</strong><small>Aguardando conexão</small></div></li></ol></section>
+      </div>
+    </section>
+  </main>
+  <div class="dashboard-error" role="alert" hidden><strong>Não foi possível abrir o painel.</strong><span></span><a href="/">Voltar ao site</a></div>
+  <script src="assets/dashboard.js" defer></script>
+</body>
+</html>

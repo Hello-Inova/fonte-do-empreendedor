@@ -93,7 +93,7 @@ if(accessTrigger&&accessModal){
   function openAccessModal(){
     accessModal.showModal();
     document.body.classList.add('modal-open');
-    accessModal.querySelector('input[name="email"]').focus();
+    accessModal.querySelector('input[name="login"]').focus();
   }
   function closeAccessModal(){
     accessModal.close();
@@ -126,16 +126,30 @@ if(accessTrigger&&accessModal){
     accessForm.dataset.mode=resetMode?'reset':'login';
     passwordLabel.hidden=resetMode;
     passwordInput.required=!resetMode;
-    accessIntro.textContent=resetMode?'Informe seu e-mail para receber as instruções de redefinição.':'Entre com seu e-mail e senha para continuar.';
+    accessIntro.textContent=resetMode?'Informe seu usuário ou e-mail para receber as instruções de redefinição.':'Entre com seu usuário ou e-mail e senha para continuar.';
     resetLink.textContent=resetMode?'Voltar ao login':'Esqueci minha senha';
     submitLabel.textContent=resetMode?'Enviar instruções':'Entrar';
     accessStatus.textContent='';
-    accessModal.querySelector('input[name="email"]').focus();
+    accessModal.querySelector('input[name="login"]').focus();
   });
   accessForm.addEventListener('submit',event=>{
     event.preventDefault();
-    accessStatus.textContent=accessForm.dataset.mode==='reset'
-      ?'A redefinição está preparada. O envio do e-mail será ativado quando a autenticação estiver conectada.'
-      :'Acesso preparado. A autenticação e a identificação automática do perfil serão liberadas quando a área restrita estiver conectada.';
+    if(accessForm.dataset.mode==='reset'){
+      accessStatus.textContent='A redefinição por e-mail será ativada na próxima etapa de integração.';
+      return;
+    }
+    const submitButton=accessForm.querySelector('.access-submit');
+    submitButton.disabled=true;
+    submitLabel.textContent='Entrando…';
+    accessStatus.textContent='';
+    const payload={login:accessForm.elements.login.value.trim(),password:accessForm.elements.senha.value};
+    fetch('/api/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
+      .then(async response=>({ok:response.ok,data:await response.json().catch(()=>({}))}))
+      .then(({ok,data})=>{
+        if(!ok)throw new Error(data.message||'Não foi possível entrar.');
+        location.assign('/dashboard.html');
+      })
+      .catch(error=>{accessStatus.textContent=error.message})
+      .finally(()=>{submitButton.disabled=false;submitLabel.textContent='Entrar'});
   });
 }

@@ -27,7 +27,13 @@
 .password-reset-link{justify-self:end;margin-top:-8px;color:#c8c5bd;font-size:12px;border-bottom:1px solid rgba(255,255,255,.26);padding-bottom:3px;transition:.25s}
 .password-reset-link:hover,.password-reset-link:focus-visible{color:var(--gold);border-color:var(--gold)}
 .access-submit{margin-top:4px;border:0;background:var(--gold);color:var(--ink);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font:700 13px "DM Sans",sans-serif;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+.access-submit:disabled{opacity:.62;cursor:wait}
 .access-status{min-height:20px;margin:0;color:#c8c5bd;font-size:13px;line-height:1.5}
+.partner-login-cta{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-size:13px}
+.partner-login-cta a{color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px}
+.partner-button{border:1px solid rgba(241,199,91,.55);color:var(--gold);transition:.25s}
+.partner-button:hover,.partner-button:focus-visible{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.final-actions{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
 body.modal-open{overflow:hidden}
 @keyframes access-in{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
 @media(max-width:560px){.access-trigger{width:46px;height:46px;padding:0 14px}.access-trigger:hover,.access-trigger:focus-visible,.access-trigger.is-ready{width:118px}.access-modal-card{padding:44px 24px 30px}.access-brand-logo{width:96px;height:96px}}
