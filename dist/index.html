@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/sections.css">
   <link rel="stylesheet" href="assets/community.css">
+  <link rel="stylesheet" href="assets/access.css">
 </head>
 <body>
   <canvas id="three-stage" aria-hidden="true"></canvas>
@@ -29,8 +30,30 @@
       <a href="#parceiros">Parceiros</a>
       <a href="#depoimentos">Depoimentos</a>
     </nav>
-    <a class="header-cta" href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Instagram <span>↗</span></a>
+    <button class="access-trigger" type="button" aria-label="Exibir acesso" aria-expanded="false" aria-controls="access-modal">
+      <span class="access-label">Acessar</span><span class="access-arrow" aria-hidden="true">↗</span>
+    </button>
   </header>
+
+  <dialog class="access-modal" id="access-modal" aria-labelledby="access-title">
+    <div class="access-modal-card">
+      <button class="access-close" type="button" aria-label="Fechar área de acesso">×</button>
+      <p class="access-kicker">Área reservada</p>
+      <h2 id="access-title">Bem-vindo à Fonte.</h2>
+      <p class="access-intro">Escolha seu perfil e entre para continuar.</p>
+      <div class="access-roles" aria-label="Tipo de acesso">
+        <button class="active" type="button" data-role="parceiro" aria-pressed="true">Parceiro</button>
+        <button type="button" data-role="administrador" aria-pressed="false">Administrador</button>
+      </div>
+      <form class="access-form">
+        <input type="hidden" name="perfil" value="parceiro">
+        <label>E-mail<input type="email" name="email" autocomplete="username" placeholder="voce@empresa.com" required></label>
+        <label>Senha<input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha" required></label>
+        <button class="access-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        <p class="access-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </dialog>
 
   <main>
     <section class="hero" id="inicio">

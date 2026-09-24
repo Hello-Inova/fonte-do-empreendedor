@@ -76,3 +76,46 @@ if(carousel){
   addEventListener('resize',()=>updateCarousel(currentSlide),{passive:true});
   updateCarousel(0);
 }
+
+const accessTrigger=document.querySelector('.access-trigger');
+const accessModal=document.querySelector('#access-modal');
+if(accessTrigger&&accessModal){
+  const closeButton=accessModal.querySelector('.access-close');
+  const roleButtons=[...accessModal.querySelectorAll('[data-role]')];
+  const roleInput=accessModal.querySelector('input[name="perfil"]');
+  const accessForm=accessModal.querySelector('.access-form');
+  const accessStatus=accessModal.querySelector('.access-status');
+
+  function openAccessModal(){
+    accessModal.showModal();
+    document.body.classList.add('modal-open');
+    accessModal.querySelector('input[name="email"]').focus();
+  }
+  function closeAccessModal(){
+    accessModal.close();
+    document.body.classList.remove('modal-open');
+    accessTrigger.focus();
+  }
+
+  accessTrigger.addEventListener('click',()=>{
+    if(!accessTrigger.classList.contains('is-ready')){
+      accessTrigger.classList.add('is-ready');
+      accessTrigger.setAttribute('aria-expanded','true');
+      accessTrigger.setAttribute('aria-label','Abrir área de acesso');
+      return;
+    }
+    openAccessModal();
+  });
+  closeButton.addEventListener('click',closeAccessModal);
+  accessModal.addEventListener('click',event=>{if(event.target===accessModal)closeAccessModal()});
+  accessModal.addEventListener('close',()=>document.body.classList.remove('modal-open'));
+  roleButtons.forEach(button=>button.addEventListener('click',()=>{
+    roleButtons.forEach(item=>{const active=item===button;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active))});
+    roleInput.value=button.dataset.role;
+    accessStatus.textContent='';
+  }));
+  accessForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    accessStatus.textContent=`Acesso de ${roleInput.value} preparado. A autenticação será liberada quando a área restrita estiver conectada.`;
+  });
+}

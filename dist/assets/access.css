@@ -1,0 +1,29 @@
+.access-trigger{width:52px;height:52px;padding:0 17px;border:1px solid rgba(241,199,91,.72);background:rgba(7,7,8,.45);color:var(--gold);display:flex;align-items:center;justify-content:flex-end;gap:11px;overflow:hidden;cursor:pointer;transition:width .42s cubic-bezier(.22,.8,.25,1),background .25s,border-color .25s;font-family:"DM Sans",sans-serif}
+.access-trigger:hover,.access-trigger:focus-visible,.access-trigger.is-ready{width:132px;background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.access-label{max-width:0;opacity:0;transform:translateX(10px);overflow:hidden;text-transform:uppercase;font-size:12px;font-weight:700;letter-spacing:.13em;white-space:nowrap;transition:max-width .42s cubic-bezier(.22,.8,.25,1),opacity .22s,transform .35s}
+.access-trigger:hover .access-label,.access-trigger:focus-visible .access-label,.access-trigger.is-ready .access-label{max-width:76px;opacity:1;transform:none}
+.access-arrow{flex:0 0 auto;font-size:20px;line-height:1;transition:transform .35s}
+.access-trigger:hover .access-arrow,.access-trigger:focus-visible .access-arrow,.access-trigger.is-ready .access-arrow{transform:translate(2px,-2px)}
+.access-modal{width:min(92vw,510px);padding:0;border:1px solid rgba(241,199,91,.32);background:transparent;color:#f7f4ed;overflow:visible}
+.access-modal::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(9px)}
+.access-modal[open]{animation:access-in .36s cubic-bezier(.22,.8,.25,1)}
+.access-modal-card{position:relative;padding:50px;background:linear-gradient(145deg,#111113,#080809);box-shadow:0 30px 100px rgba(0,0,0,.65)}
+.access-modal-card::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--gold)}
+.access-close{position:absolute;top:17px;right:18px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:transparent;color:#fff;font-size:25px;line-height:1;cursor:pointer;transition:.25s}
+.access-close:hover,.access-close:focus-visible{border-color:var(--gold);color:var(--gold);transform:rotate(8deg)}
+.access-kicker{margin:0 0 18px;color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.2em}
+.access-modal h2{font-size:clamp(2.5rem,8vw,4rem);line-height:.98;letter-spacing:-.05em}
+.access-intro{margin:20px 0 28px;color:var(--muted);line-height:1.6}
+.access-roles{display:grid;grid-template-columns:1fr 1fr;margin-bottom:26px;border:1px solid var(--line);padding:4px}
+.access-roles button{border:0;padding:13px;background:transparent;color:#a6a39d;font:600 12px "DM Sans",sans-serif;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:.25s}
+.access-roles button.active{background:var(--gold);color:var(--ink)}
+.access-form{display:grid;gap:18px}
+.access-form label{display:grid;gap:9px;color:#c8c5bd;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.access-form input{width:100%;border:1px solid var(--line);border-radius:0;background:#0b0b0c;color:#fff;padding:15px 16px;font:15px "DM Sans",sans-serif;outline:none;transition:.25s}
+.access-form input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(241,199,91,.09)}
+.access-submit{margin-top:4px;border:0;background:var(--gold);color:var(--ink);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;font:700 13px "DM Sans",sans-serif;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+.access-status{min-height:20px;margin:0;color:#c8c5bd;font-size:13px;line-height:1.5}
+body.modal-open{overflow:hidden}
+@keyframes access-in{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@media(max-width:560px){.access-trigger{width:46px;height:46px;padding:0 14px}.access-trigger:hover,.access-trigger:focus-visible,.access-trigger.is-ready{width:118px}.access-modal-card{padding:44px 24px 30px}.access-modal h2{font-size:2.8rem}}
+@media(prefers-reduced-motion:reduce){.access-trigger,.access-label,.access-arrow,.access-close{transition:none}.access-modal[open]{animation:none}}
