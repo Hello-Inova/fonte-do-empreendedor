@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cadastre sua empresa como parceira da Fonte do Empreendedor.">
+  <title>Ser Parceiro — A Fonte do Empreendedor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-redondo.png">
+  <link rel="stylesheet" href="assets/register.css">
+</head>
+<body>
+  <main class="register-shell">
+    <section class="register-story">
+      <a class="register-brand" href="/"><img src="assets/logo-oficial.png" alt=""><span>A Fonte<small>do Empreendedor</small></span></a>
+      <div><p class="eyebrow">Rede de parceiros</p><h1>Seu negócio também pode caminhar com propósito.</h1><p>Cadastre sua empresa, compartilhe seu nicho e acompanhe a programação anual da Fonte em um espaço exclusivo.</p></div>
+      <blockquote>“Boas conexões ampliam o propósito.”</blockquote>
+    </section>
+    <section class="register-panel">
+      <div class="form-heading"><p>Cadastro de parceiro</p><h2>Crie seu acesso</h2><span>Todos os campos marcados são necessários.</span></div>
+      <form class="register-form">
+        <label>Nome da empresa<input name="companyName" maxlength="100" autocomplete="organization" required placeholder="Como sua empresa será exibida"></label>
+        <label>Nicho da empresa<input name="niche" maxlength="180" required placeholder="Ex.: consultoria financeira para famílias"></label>
+        <div class="form-row">
+          <label>Usuário<input name="login" minlength="3" maxlength="40" autocomplete="username" required placeholder="seu_usuario"></label>
+          <label>E-mail<input type="email" name="email" autocomplete="email" required placeholder="voce@empresa.com"></label>
+        </div>
+        <div class="form-row">
+          <label>Senha<span class="password-wrap"><input type="password" name="password" minlength="8" autocomplete="new-password" required placeholder="Mínimo de 8 caracteres"><button type="button" data-toggle-password>Mostrar</button></span></label>
+          <label>Confirmar senha<input type="password" name="confirmPassword" minlength="8" autocomplete="new-password" required placeholder="Repita sua senha"></label>
+        </div>
+        <label class="terms"><input type="checkbox" required><span>Confirmo que os dados representam minha empresa e serão exibidos na rede de parceiros após eu adicionar o logo.</span></label>
+        <button class="register-submit" type="submit"><span>Criar conta de parceiro</span><b>→</b></button>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
+      <p class="login-link">Já possui cadastro? <a href="/?login=1">Entrar</a></p>
+    </section>
+  </main>
+  <script src="assets/register.js" defer></script>
+</body>
+</html>

@@ -22,6 +22,29 @@ export async function ensureUsersTable(sql){
   )`;
 }
 
+export async function ensureAppSchema(sql){
+  await ensureUsersTable(sql);
+  await sql`CREATE TABLE IF NOT EXISTS partner_profiles (
+    user_id UUID PRIMARY KEY REFERENCES app_users(id) ON DELETE CASCADE,
+    company_name TEXT NOT NULL,
+    niche TEXT NOT NULL DEFAULT '',
+    logo_data TEXT,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`;
+  await sql`CREATE TABLE IF NOT EXISTS agenda_events (
+    id UUID PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    time_label TEXT NOT NULL DEFAULT '',
+    location TEXT NOT NULL DEFAULT '',
+    created_by UUID REFERENCES app_users(id) ON DELETE SET NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`;
+}
+
 export function hashPassword(password){
   const salt=randomBytes(16).toString('hex');
   const hash=scryptSync(password,salt,64).toString('hex');
@@ -59,6 +82,13 @@ export function readSession(request){
   const left=Buffer.from(sig);const right=Buffer.from(expected);
   if(left.length!==right.length||!timingSafeEqual(left,right))return null;
   try{const session=JSON.parse(Buffer.from(payload,'base64url').toString('utf8'));return session.exp>Date.now()/1000?session:null}catch{return null}
+}
+
+export async function authenticatedUser(request,sql){
+  const session=readSession(request);
+  if(!session)return null;
+  const [user]=await sql`SELECT id, login, email, role, active FROM app_users WHERE id=${session.sub} LIMIT 1`;
+  return user?.active?user:null;
 }
 
 export function sessionCookie(token){return `${COOKIE_NAME}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${SESSION_SECONDS}`}

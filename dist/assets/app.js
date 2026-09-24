@@ -147,9 +147,15 @@ if(accessTrigger&&accessModal){
       .then(async response=>({ok:response.ok,data:await response.json().catch(()=>({}))}))
       .then(({ok,data})=>{
         if(!ok)throw new Error(data.message||'Não foi possível entrar.');
-        location.assign('/dashboard.html');
+        location.assign(data.user?.role==='admin'?'/dashboard.html':'/partner.html');
       })
       .catch(error=>{accessStatus.textContent=error.message})
       .finally(()=>{submitButton.disabled=false;submitLabel.textContent='Entrar'});
   });
+
+  if(new URLSearchParams(location.search).get('login')==='1'){
+    accessTrigger.classList.add('is-ready');
+    accessTrigger.setAttribute('aria-expanded','true');
+    openAccessModal();
+  }
 }

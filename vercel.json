@@ -7,7 +7,7 @@
   },
   "headers": [
     {
-      "source": "/dashboard.html",
+      "source": "/(dashboard|partner).html",
       "headers": [
         { "key": "Cache-Control", "value": "no-store" },
         { "key": "X-Frame-Options", "value": "DENY" }

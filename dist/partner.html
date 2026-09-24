@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow">
+  <title>Área do parceiro — A Fonte do Empreendedor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-redondo.png"><link rel="stylesheet" href="assets/dashboard.css"><link rel="stylesheet" href="assets/portal.css">
+</head>
+<body class="dashboard-loading" data-portal-role="partner">
+  <div class="mobile-overlay" data-close-menu></div>
+  <aside class="sidebar" id="dashboard-menu" aria-label="Menu do parceiro">
+    <a class="dashboard-brand" href="#inicio"><img src="assets/logo-oficial.png" alt=""><span>A Fonte<small>Área do parceiro</small></span></a>
+    <nav><a class="active" href="#inicio" data-view-link><span>01</span>Início</a><a href="#agenda" data-view-link><span>02</span>Agenda</a><a href="#perfil" data-view-link><span>03</span>Perfil</a></nav>
+    <div class="sidebar-footer"><span class="status-dot"></span><span>Parceiro conectado</span></div>
+  </aside>
+  <main class="dashboard-main">
+    <header class="dashboard-topbar"><button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="dashboard-menu"><span></span><span></span><span></span></button><div><p>Área do parceiro</p><h1 data-page-title>Início</h1></div><div class="account-menu"><span class="account-avatar">AF</span><div><strong data-user-name>Parceiro</strong><small data-user-role>Carregando…</small></div><button class="logout-button" type="button">Sair</button></div></header>
+    <section class="dashboard-content portal-view" id="inicio" data-view>
+      <div class="welcome-panel partner-welcome"><div><p class="eyebrow">Sua conexão com a Fonte</p><h2>Bem-vindo, <span data-company-greeting data-user-greeting>parceiro</span>.</h2><p>Acompanhe os próximos encontros e mantenha a apresentação da sua empresa atualizada.</p></div><a href="/#parceiros">Ver rede pública <span>↗</span></a></div>
+      <div class="metric-grid partner-metrics"><article><span>Próximo encontro</span><strong class="metric-date" data-next-event>—</strong><small data-next-event-title>Agenda aberta</small></article><article><span>Perfil</span><strong data-profile-status>—</strong><small>Logo e nicho da empresa</small></article><article><span>Rede</span><strong data-partner-count>—</strong><small>Parceiros conectados</small></article></div>
+      <div class="dashboard-grid"><section class="dashboard-card"><div class="card-head"><div><p>Programação</p><h3>Próximos encontros</h3></div><button type="button" data-go-view="agenda">Ver agenda</button></div><div class="compact-events" data-upcoming-events></div></section><section class="dashboard-card profile-prompt"><p class="eyebrow">Sua vitrine</p><h3>Conte ao movimento o que sua empresa faz.</h3><p>Seu logo e nicho aparecem na seção de parceiros do site.</p><button class="primary-action" type="button" data-go-view="perfil">Completar perfil</button></section></div>
+    </section>
+    <section class="dashboard-content portal-view" id="agenda" data-view hidden><div class="view-heading"><div><p class="eyebrow">Programação anual</p><h2>Agenda da Fonte</h2><p>A programação é organizada pela administração e atualizada automaticamente aqui.</p></div></div><div class="dashboard-card calendar-card partner-calendar"><div class="card-head"><div><p>Visão anual</p><h3 data-calendar-year></h3></div><select data-year-select aria-label="Escolher ano"></select></div><div class="annual-calendar" data-calendar></div></div></section>
+    <section class="dashboard-content portal-view" id="perfil" data-view hidden><div class="view-heading"><div><p class="eyebrow">Sua empresa</p><h2>Perfil do parceiro</h2><p>Estas informações serão exibidas na vitrine pública de parceiros.</p></div></div><form class="profile-form dashboard-card"><div class="logo-uploader"><div class="logo-preview" data-logo-preview><span>AF</span></div><div><h3>Logo da empresa</h3><p>PNG, JPG ou WebP, com até 500 KB.</p><label class="upload-button">Escolher imagem<input type="file" name="logo" accept="image/png,image/jpeg,image/webp"></label></div></div><div class="profile-fields"><label>Nome da empresa<input name="companyName" maxlength="100" required></label><label>Nicho da empresa<textarea name="niche" maxlength="180" rows="4" required placeholder="Explique em poucas palavras o que sua empresa faz"></textarea></label></div><button class="primary-action" type="submit">Salvar e publicar perfil</button><p class="form-feedback" aria-live="polite"></p></form></section>
+  </main>
+  <div class="dashboard-error" role="alert" hidden><strong>Não foi possível abrir sua área.</strong><span></span><a href="/">Voltar ao site</a></div>
+  <script src="assets/dashboard.js" defer></script>
+</body>
+</html>

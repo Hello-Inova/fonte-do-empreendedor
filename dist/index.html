@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/sections.css">
   <link rel="stylesheet" href="assets/community.css">
   <link rel="stylesheet" href="assets/access.css">
+  <link rel="stylesheet" href="assets/dynamic.css">
 </head>
 <body>
   <canvas id="three-stage" aria-hidden="true"></canvas>
@@ -27,6 +28,7 @@
       <a href="#missao">Missão</a>
       <a href="#jornada">Jornada</a>
       <a href="#movimento">Movimento</a>
+      <a href="#programacao">Programação</a>
       <a href="#parceiros">Parceiros</a>
       <a href="#depoimentos">Depoimentos</a>
     </nav>
@@ -51,7 +53,7 @@
         <button class="access-submit" type="submit"><span class="access-submit-label">Entrar</span><span aria-hidden="true">→</span></button>
         <p class="access-status" aria-live="polite"></p>
       </form>
-      <div class="partner-login-cta"><span>Ainda não faz parte?</span><a href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Ser Parceiro <span aria-hidden="true">↗</span></a></div>
+      <div class="partner-login-cta"><span>Ainda não faz parte?</span><a href="/cadastro.html">Ser Parceiro <span aria-hidden="true">↗</span></a></div>
     </div>
   </dialog>
 
@@ -66,7 +68,7 @@
         <p class="lead">Um lugar para empreendedores encontrarem propósito, direção e uma comunidade que coloca Jesus no centro de cada decisão.</p>
         <div class="hero-actions">
           <a class="button primary" href="#missao">Conheça a missão <span>↓</span></a>
-          <a class="button partner-button" href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Ser Parceiro <span>↗</span></a>
+          <a class="button partner-button" href="/cadastro.html">Ser Parceiro <span>↗</span></a>
         </div>
       </div>
 
@@ -128,23 +130,35 @@
       <p class="image-note">Imagens do perfil oficial @afontedoempreendedor_</p>
     </section>
 
+    <section class="programming" id="programacao">
+      <div class="programming-heading reveal">
+        <div><div class="section-label">05 — Programação</div><h2>Um ano para viver<br><span>propósito em movimento.</span></h2></div>
+        <div class="programming-copy"><p>A agenda da Fonte é atualizada pela nossa equipe e compartilhada com toda a comunidade.</p><select data-public-year aria-label="Escolher ano da programação"></select></div>
+      </div>
+      <div class="public-calendar reveal" data-public-calendar></div>
+    </section>
+
     <section class="partners" id="parceiros">
       <div class="partners-intro reveal">
-        <div class="section-label">05 — Parceiros</div>
+        <div class="section-label">06 — Parceiros</div>
         <h2>Boas conexões ampliam o <em>propósito.</em></h2>
         <p>Construímos pontes com quem acredita em empreendedores mais conscientes, negócios saudáveis e Jesus no centro de cada decisão.</p>
-        <a class="button partner-button" href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Ser Parceiro <span>↗</span></a>
+        <a class="button partner-button" href="/cadastro.html">Ser Parceiro <span>↗</span></a>
       </div>
       <div class="partner-grid">
         <article class="partner-card reveal"><span class="partner-number">01</span><div class="partner-icon">✦</div><h3>Igrejas e comunidades</h3><p>Ambientes que acolhem, conectam e fortalecem empreendedores em sua jornada.</p></article>
         <article class="partner-card reveal"><span class="partner-number">02</span><div class="partner-icon">◎</div><h3>Empresas com propósito</h3><p>Negócios que desejam gerar impacto sem abrir mão de valores e da essência.</p></article>
         <article class="partner-card reveal"><span class="partner-number">03</span><div class="partner-icon">↗</div><h3>Mentores e especialistas</h3><p>Profissionais dispostos a compartilhar conhecimento, direção e experiência.</p></article>
       </div>
+      <div class="partner-showcase reveal">
+        <div class="showcase-head"><div><small>QUEM CAMINHA CONOSCO</small><h3>Conheça nossa rede.</h3></div><div><button type="button" data-partner-prev aria-label="Parceiro anterior">←</button><button type="button" data-partner-next aria-label="Próximo parceiro">→</button></div></div>
+        <div class="public-partner-viewport"><div class="public-partner-track" data-public-partners><article class="public-partner-empty">Os novos parceiros aparecerão aqui.</article></div></div>
+      </div>
     </section>
 
     <section class="testimonials" id="depoimentos">
       <div class="testimonial-heading reveal">
-        <div class="section-label">06 — Depoimentos</div>
+        <div class="section-label">07 — Depoimentos</div>
         <h2>Histórias que ainda serão <span>contadas.</span></h2>
         <p>Este espaço foi preparado para receber experiências reais da nossa comunidade. Cada história pode ser a direção que outro empreendedor precisa.</p>
       </div>
@@ -174,7 +188,7 @@
 
     <section class="ratings" id="avaliacoes">
       <div class="rating-copy reveal">
-        <div class="section-label">07 — Avaliações</div>
+        <div class="section-label">08 — Avaliações</div>
         <h2>Como foi sua experiência com a Fonte?</h2>
         <p>Sua percepção nos ajuda a construir encontros cada vez mais relevantes, acolhedores e conectados ao propósito.</p>
         <div class="rating-tags" aria-label="Aspectos da experiência"><span>Conteúdo</span><span>Conexão</span><span>Propósito</span><span>Acolhimento</span></div>
@@ -199,7 +213,7 @@
         <p class="eyebrow"><span></span> Sua jornada pode começar aqui</p>
         <h2>Volte para<br>a <em>Fonte.</em></h2>
         <p>Você não precisa construir sozinho. Faça parte de uma comunidade que acredita no seu chamado e caminha na mesma direção.</p>
-        <div class="final-actions"><a class="button primary" href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Siga e faça parte <span>↗</span></a><a class="button partner-button" href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Ser Parceiro <span>↗</span></a></div>
+        <div class="final-actions"><a class="button primary" href="https://www.instagram.com/afontedoempreendedor_/" target="_blank" rel="noopener">Siga e faça parte <span>↗</span></a><a class="button partner-button" href="/cadastro.html">Ser Parceiro <span>↗</span></a></div>
       </div>
     </section>
   </main>
@@ -211,6 +225,7 @@
   </footer>
 
   <script src="assets/typing.js" defer></script>
+  <script src="assets/public-data.js" defer></script>
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>
   <script type="module" src="assets/app.js"></script>
 </body>
