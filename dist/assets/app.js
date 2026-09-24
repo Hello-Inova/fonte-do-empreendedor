@@ -35,3 +35,19 @@ requestAnimationFrame(tick);
 
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.18});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const starButtons=[...document.querySelectorAll('.stars button')];
+const ratingResponse=document.querySelector('.rating-response');
+const ratingMessages={1:'Obrigado pela sinceridade. Queremos ouvir como podemos melhorar.',2:'Obrigado por avaliar. Sua experiência importa para nós.',3:'Obrigado! Estamos construindo essa jornada com você.',4:'Que bom saber disso. Obrigado por caminhar conosco!',5:'Que alegria! Obrigado por fazer parte desta história.'};
+function setRating(value){
+  starButtons.forEach(button=>{
+    const active=Number(button.dataset.rating)<=value;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-checked',Number(button.dataset.rating)===value?'true':'false');
+  });
+  ratingResponse.textContent=ratingMessages[value];
+  localStorage.setItem('fonte-avaliacao',String(value));
+}
+starButtons.forEach(button=>button.addEventListener('click',()=>setRating(Number(button.dataset.rating))));
+const savedRating=Number(localStorage.getItem('fonte-avaliacao'));
+if(savedRating>=1&&savedRating<=5)setRating(savedRating);
