@@ -39,12 +39,16 @@
     <div class="access-modal-card">
       <button class="access-close" type="button" aria-label="Fechar área de acesso">×</button>
       <p class="access-kicker">Área reservada</p>
-      <h2 id="access-title">Bem-vindo à Fonte.</h2>
+      <h2 class="visually-hidden" id="access-title">Acesso à Fonte do Empreendedor</h2>
+      <img class="access-brand-logo" src="assets/logo-oficial.png" alt="A Fonte do Empreendedor">
       <p class="access-intro">Entre com seu e-mail e senha para continuar.</p>
-      <form class="access-form">
+      <form class="access-form" data-mode="login">
         <label>E-mail<input type="email" name="email" autocomplete="username" placeholder="voce@empresa.com" required></label>
-        <label>Senha<input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha" required></label>
-        <button class="access-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        <label class="password-label">Senha
+          <span class="password-field"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha" required><button class="password-toggle" type="button" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button></span>
+        </label>
+        <a class="password-reset-link" href="#redefinir-senha">Esqueci minha senha</a>
+        <button class="access-submit" type="submit"><span class="access-submit-label">Entrar</span><span aria-hidden="true">→</span></button>
         <p class="access-status" aria-live="polite"></p>
       </form>
     </div>

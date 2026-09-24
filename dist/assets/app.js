@@ -83,6 +83,12 @@ if(accessTrigger&&accessModal){
   const closeButton=accessModal.querySelector('.access-close');
   const accessForm=accessModal.querySelector('.access-form');
   const accessStatus=accessModal.querySelector('.access-status');
+  const accessIntro=accessModal.querySelector('.access-intro');
+  const passwordLabel=accessModal.querySelector('.password-label');
+  const passwordInput=accessModal.querySelector('input[name="senha"]');
+  const passwordToggle=accessModal.querySelector('.password-toggle');
+  const resetLink=accessModal.querySelector('.password-reset-link');
+  const submitLabel=accessModal.querySelector('.access-submit-label');
 
   function openAccessModal(){
     accessModal.showModal();
@@ -107,8 +113,29 @@ if(accessTrigger&&accessModal){
   closeButton.addEventListener('click',closeAccessModal);
   accessModal.addEventListener('click',event=>{if(event.target===accessModal)closeAccessModal()});
   accessModal.addEventListener('close',()=>document.body.classList.remove('modal-open'));
+  passwordToggle.addEventListener('click',()=>{
+    const showing=passwordInput.type==='text';
+    passwordInput.type=showing?'password':'text';
+    passwordToggle.textContent=showing?'Mostrar':'Ocultar';
+    passwordToggle.setAttribute('aria-label',showing?'Mostrar senha':'Ocultar senha');
+    passwordToggle.setAttribute('aria-pressed',String(!showing));
+  });
+  resetLink.addEventListener('click',event=>{
+    event.preventDefault();
+    const resetMode=accessForm.dataset.mode!=='reset';
+    accessForm.dataset.mode=resetMode?'reset':'login';
+    passwordLabel.hidden=resetMode;
+    passwordInput.required=!resetMode;
+    accessIntro.textContent=resetMode?'Informe seu e-mail para receber as instruções de redefinição.':'Entre com seu e-mail e senha para continuar.';
+    resetLink.textContent=resetMode?'Voltar ao login':'Esqueci minha senha';
+    submitLabel.textContent=resetMode?'Enviar instruções':'Entrar';
+    accessStatus.textContent='';
+    accessModal.querySelector('input[name="email"]').focus();
+  });
   accessForm.addEventListener('submit',event=>{
     event.preventDefault();
-    accessStatus.textContent='Acesso preparado. A autenticação e a identificação automática do perfil serão liberadas quando a área restrita estiver conectada.';
+    accessStatus.textContent=accessForm.dataset.mode==='reset'
+      ?'A redefinição está preparada. O envio do e-mail será ativado quando a autenticação estiver conectada.'
+      :'Acesso preparado. A autenticação e a identificação automática do perfil serão liberadas quando a área restrita estiver conectada.';
   });
 }
