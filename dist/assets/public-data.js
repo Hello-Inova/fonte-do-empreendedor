@@ -34,6 +34,7 @@ function changePublicMonth(delta){
 function renderPublicPartners(){
   const track=document.querySelector('[data-public-partners]');
   track.innerHTML=publicState.partners.length?publicState.partners.map(partner=>`<article class="public-partner-card"><div class="public-partner-logo">${partner.logoData?`<img src="${partner.logoData}" alt="Logo de ${publicEscape(partner.companyName)}">`:`<span>${publicEscape(publicInitials(partner.companyName))}</span>`}</div><h4>${publicEscape(partner.companyName)}</h4><p>${publicEscape(partner.niche||'Parceiro da Fonte do Empreendedor')}</p></article>`).join(''):'<article class="public-partner-empty">Os novos parceiros aparecerão aqui.</article>';
+  adaptPartnerLogos(track);
   movePartners(0);
 }
 function movePartners(delta){const track=document.querySelector('[data-public-partners]');const cards=[...track.querySelectorAll('.public-partner-card')];if(!cards.length)return;publicState.partnerIndex=Math.max(0,Math.min(cards.length-1,publicState.partnerIndex+delta));const gap=parseFloat(getComputedStyle(track).gap)||0;track.style.transform=`translate3d(${-publicState.partnerIndex*(cards[0].getBoundingClientRect().width+gap)}px,0,0)`}

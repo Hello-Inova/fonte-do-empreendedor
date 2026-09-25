@@ -31,22 +31,8 @@ navLinks.forEach(link=>link.addEventListener('click',event=>{event.preventDefaul
 document.querySelectorAll('[data-go-view]').forEach(button=>button.addEventListener('click',()=>showView(button.dataset.goView)));
 
 function initials(name){return String(name||'AF').split(/\s+/).slice(0,2).map(part=>part[0]).join('').toUpperCase()}
-function setLogo(preview,logo,name){preview.innerHTML=logo?`<img src="${logo}" alt="Logo de ${escapeHtml(name)}">`:`<span>${escapeHtml(initials(name))}</span>`}
-async function normalizeLogo(file){
-  const bitmap=await createImageBitmap(file,{imageOrientation:'from-image'});
-  let result;
-  for(const size of [600,480,360]){
-    const canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;
-    const context=canvas.getContext('2d');context.clearRect(0,0,size,size);
-    const padding=Math.round(size*.07);const scale=Math.min((size-padding*2)/bitmap.width,(size-padding*2)/bitmap.height);
-    const width=Math.round(bitmap.width*scale);const height=Math.round(bitmap.height*scale);
-    context.imageSmoothingEnabled=true;context.imageSmoothingQuality='high';context.drawImage(bitmap,(size-width)/2,(size-height)/2,width,height);
-    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',.88));
-    result=blob;if(blob.size<=500*1024)break;
-  }
-  bitmap.close();
-  return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(result)});
-}
+function setLogo(preview,logo,name){preview.innerHTML=logo?`<img src="${logo}" alt="Logo de ${escapeHtml(name)}">`:`<span>${escapeHtml(initials(name))}</span>`;adaptPartnerLogos(preview)}
+const normalizeLogo=file=>normalizePartnerLogo(file);
 
 function renderUpcoming(){
   const today=new Date().toISOString().slice(0,10);
@@ -79,6 +65,7 @@ function renderPartners(){
   document.querySelectorAll('[data-partner-count]').forEach(item=>item.textContent=String(state.partners.length));
   const grid=document.querySelector('[data-partners-grid]');if(!grid)return;
   grid.innerHTML=state.partners.length?state.partners.map(partner=>`<article class="portal-partner"><div class="portal-partner-logo">${partner.logoData?`<img src="${partner.logoData}" alt="Logo de ${escapeHtml(partner.companyName)}">`:`<span>${escapeHtml(initials(partner.companyName))}</span>`}</div><h3>${escapeHtml(partner.companyName)}</h3><p>${escapeHtml(partner.niche||'Nicho ainda não informado.')}</p></article>`).join(''):'<div class="empty-inline">Os parceiros cadastrados aparecerão aqui.</div>';
+  adaptPartnerLogos(grid);
 }
 function renderData(){document.querySelectorAll('[data-event-count]').forEach(item=>item.textContent=String(state.events.length));renderUpcoming();prepareYearSelectors();renderCalendars();renderEventManagement();renderPartners()}
 
