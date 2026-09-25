@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="assets/dynamic.css">
   <link rel="stylesheet" href="assets/partner-display.css">
   <link rel="stylesheet" href="assets/testimonial-logos.css">
+  <link rel="stylesheet" href="assets/site-navigation.css">
 </head>
 <body>
   <canvas id="three-stage" aria-hidden="true"></canvas>
@@ -26,14 +27,19 @@
       <img class="brand-logo" src="assets/logo-oficial.png" alt="Logo oficial A Fonte Empreendedores">
       <span>A Fonte<br><small>do Empreendedor</small></span>
     </a>
-    <nav aria-label="Navegação principal">
+    <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+      <p class="site-nav-label">Navegue pelo site</p>
       <a href="#missao">Missão</a>
       <a href="#jornada">Jornada</a>
       <a href="#movimento">Movimento</a>
       <a href="#programacao">Programação</a>
       <a href="#parceiros">Parceiros</a>
       <a href="#depoimentos">Depoimentos</a>
+      <a class="site-nav-partner" href="/cadastro.html">Ser Parceiro <span aria-hidden="true">↗</span></a>
     </nav>
+    <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="site-nav">
+      <span></span><span></span><span></span>
+    </button>
     <button class="access-trigger" type="button" aria-label="Exibir acesso" aria-expanded="false" aria-controls="access-modal">
       <span class="access-label">Acessar</span><span class="access-arrow" aria-hidden="true">↗</span>
     </button>
