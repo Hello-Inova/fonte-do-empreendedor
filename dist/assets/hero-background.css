@@ -1,0 +1,82 @@
+.hero {
+  width: 100%;
+  max-width: none;
+  min-height: 100svh;
+  grid-template-columns: minmax(0, 760px);
+  padding: clamp(130px, 15vh, 165px) max(32px, calc((100vw - var(--max)) / 2)) 80px;
+  isolation: isolate;
+  overflow: hidden;
+  background: #070708;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  z-index: -2;
+  background: url("hero-fonte.png") center 42% / cover no-repeat;
+  opacity: .68;
+  transform: scale(1.012);
+}
+
+.hero::after {
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(7,7,8,.92) 0%, rgba(7,7,8,.68) 42%, rgba(7,7,8,.28) 74%, rgba(7,7,8,.5) 100%),
+    linear-gradient(180deg, rgba(7,7,8,.36) 0%, transparent 38%, rgba(7,7,8,.72) 100%);
+}
+
+.hero-copy {
+  width: min(100%, 760px);
+  max-width: 760px;
+}
+
+.hero h1 {
+  text-shadow: 0 8px 34px rgba(0,0,0,.52);
+}
+
+.hero .lead {
+  color: #d2cec5;
+  text-shadow: 0 3px 18px rgba(0,0,0,.8);
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 112px 20px 58px;
+  }
+
+  .hero::before {
+    background-position: 58% center;
+    opacity: .66;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(90deg, rgba(7,7,8,.72) 0%, rgba(7,7,8,.38) 68%, rgba(7,7,8,.3) 100%),
+      linear-gradient(180deg, rgba(7,7,8,.28) 0%, transparent 34%, rgba(7,7,8,.7) 100%);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero::before {
+    background-position: 60% center;
+    opacity: .64;
+  }
+
+  .hero::after {
+    background:
+      linear-gradient(90deg, rgba(7,7,8,.7), rgba(7,7,8,.3)),
+      linear-gradient(180deg, rgba(7,7,8,.3) 0%, transparent 31%, rgba(7,7,8,.76) 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before {
+    transform: none;
+  }
+}
