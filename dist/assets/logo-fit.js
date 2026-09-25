@@ -42,7 +42,7 @@ async function normalizePartnerLogo(source){
 }
 
 async function adaptPartnerLogos(root=document){
-  const images=[...root.querySelectorAll('.public-partner-logo img,.portal-partner-logo img,.logo-preview img')].filter(image=>!image.dataset.smartLogo);
+  const images=[...root.querySelectorAll('.public-partner-logo img,.portal-partner-logo img,.logo-preview img,.testimonial-logo img')].filter(image=>!image.dataset.smartLogo);
   await Promise.all(images.map(async image=>{image.dataset.smartLogo='processing';try{image.src=await normalizePartnerLogo(image.currentSrc||image.src);await image.decode();const ratio=image.naturalWidth/image.naturalHeight;image.dataset.logoFit=ratio>=.82&&ratio<=1.22?'cover':'contain';image.dataset.smartLogo='ready'}catch{image.dataset.logoFit='contain';image.dataset.smartLogo='original'}}));
 }
 

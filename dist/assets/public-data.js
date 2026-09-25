@@ -42,8 +42,9 @@ function movePartners(delta){const track=document.querySelector('[data-public-pa
 function renderTestimonials(){
   const carousel=document.querySelector('.testimonial-carousel');const track=carousel.querySelector('.story-track');const dots=carousel.querySelector('.carousel-dots');
   const items=publicState.testimonials;
-  track.innerHTML=items.length?items.map((item,index)=>`<article class="story-card${index===0?' is-current':''}" aria-label="${index+1} de ${items.length}"><span>“</span><h3>${publicEscape(item.companyName)}</h3><p>${publicEscape(item.content)}</p><small>${publicEscape(item.niche||'Parceiro da Fonte')}</small></article>`).join(''):'<article class="story-card is-current"><span>“</span><h3>Em breve</h3><p>Os depoimentos publicados pelos parceiros aparecerão aqui.</p><small>Comunidade da Fonte</small></article>';
+  track.innerHTML=items.length?items.map((item,index)=>`<article class="story-card${index===0?' is-current':''}" aria-label="${index+1} de ${items.length}"><div class="story-card-top"><span>“</span><div class="testimonial-logo">${item.logoData?`<img src="${item.logoData}" alt="Logo de ${publicEscape(item.companyName)}">`:`<b>${publicEscape(publicInitials(item.companyName))}</b>`}</div></div><h3>${publicEscape(item.companyName)}</h3><p>${publicEscape(item.content)}</p><small>${publicEscape(item.niche||'Parceiro da Fonte')}</small></article>`).join(''):'<article class="story-card is-current"><span>“</span><h3>Em breve</h3><p>Os depoimentos publicados pelos parceiros aparecerão aqui.</p><small>Comunidade da Fonte</small></article>';
   dots.innerHTML=items.map((_,index)=>`<button type="button" data-slide="${index}" aria-label="Ver depoimento ${index+1}"></button>`).join('');
+  adaptPartnerLogos(track);
   publicState.testimonialIndex=0;updateTestimonials(0);
 }
 function updateTestimonials(index){
