@@ -43,6 +43,11 @@ export async function ensureAppSchema(sql){
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )`;
+  await sql`CREATE TABLE IF NOT EXISTS partner_testimonials (
+    user_id UUID PRIMARY KEY REFERENCES app_users(id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`;
 }
 
 export function hashPassword(password){

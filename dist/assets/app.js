@@ -36,47 +36,6 @@ requestAnimationFrame(tick);
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.18});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-const starButtons=[...document.querySelectorAll('.stars button')];
-const ratingResponse=document.querySelector('.rating-response');
-const ratingMessages={1:'Obrigado pela sinceridade. Queremos ouvir como podemos melhorar.',2:'Obrigado por avaliar. Sua experiência importa para nós.',3:'Obrigado! Estamos construindo essa jornada com você.',4:'Que bom saber disso. Obrigado por caminhar conosco!',5:'Que alegria! Obrigado por fazer parte desta história.'};
-function setRating(value){
-  starButtons.forEach(button=>{
-    const active=Number(button.dataset.rating)<=value;
-    button.classList.toggle('active',active);
-    button.setAttribute('aria-checked',Number(button.dataset.rating)===value?'true':'false');
-  });
-  ratingResponse.textContent=ratingMessages[value];
-  localStorage.setItem('fonte-avaliacao',String(value));
-}
-starButtons.forEach(button=>button.addEventListener('click',()=>setRating(Number(button.dataset.rating))));
-const savedRating=Number(localStorage.getItem('fonte-avaliacao'));
-if(savedRating>=1&&savedRating<=5)setRating(savedRating);
-
-const carousel=document.querySelector('.testimonial-carousel');
-if(carousel){
-  const viewport=carousel.querySelector('.story-viewport');
-  const track=carousel.querySelector('.story-track');
-  const slides=[...carousel.querySelectorAll('.story-card')];
-  const dots=[...carousel.querySelectorAll('.carousel-dots button')];
-  const countCurrent=carousel.querySelector('.carousel-count span');
-  let currentSlide=0;
-  function updateCarousel(index){
-    currentSlide=(index+slides.length)%slides.length;
-    const gap=parseFloat(getComputedStyle(track).gap)||0;
-    const distance=slides[0].getBoundingClientRect().width+gap;
-    track.style.transform=`translate3d(${-currentSlide*distance}px,0,0)`;
-    slides.forEach((slide,i)=>{slide.classList.toggle('is-current',i===currentSlide);slide.setAttribute('aria-hidden',i===currentSlide?'false':'true')});
-    dots.forEach((dot,i)=>{dot.classList.toggle('active',i===currentSlide);if(i===currentSlide)dot.setAttribute('aria-current','true');else dot.removeAttribute('aria-current')});
-    countCurrent.textContent=String(currentSlide+1).padStart(2,'0');
-  }
-  carousel.querySelector('.carousel-prev').addEventListener('click',()=>updateCarousel(currentSlide-1));
-  carousel.querySelector('.carousel-next').addEventListener('click',()=>updateCarousel(currentSlide+1));
-  dots.forEach(dot=>dot.addEventListener('click',()=>updateCarousel(Number(dot.dataset.slide))));
-  viewport.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();updateCarousel(currentSlide-1)}if(event.key==='ArrowRight'){event.preventDefault();updateCarousel(currentSlide+1)}});
-  addEventListener('resize',()=>updateCarousel(currentSlide),{passive:true});
-  updateCarousel(0);
-}
-
 const accessTrigger=document.querySelector('.access-trigger');
 const accessModal=document.querySelector('#access-modal');
 if(accessTrigger&&accessModal){

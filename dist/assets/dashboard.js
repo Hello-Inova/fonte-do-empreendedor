@@ -30,6 +30,21 @@ document.querySelectorAll('[data-go-view]').forEach(button=>button.addEventListe
 
 function initials(name){return String(name||'AF').split(/\s+/).slice(0,2).map(part=>part[0]).join('').toUpperCase()}
 function setLogo(preview,logo,name){preview.innerHTML=logo?`<img src="${logo}" alt="Logo de ${escapeHtml(name)}">`:`<span>${escapeHtml(initials(name))}</span>`}
+async function normalizeLogo(file){
+  const bitmap=await createImageBitmap(file,{imageOrientation:'from-image'});
+  let result;
+  for(const size of [600,480,360]){
+    const canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;
+    const context=canvas.getContext('2d');context.clearRect(0,0,size,size);
+    const padding=Math.round(size*.07);const scale=Math.min((size-padding*2)/bitmap.width,(size-padding*2)/bitmap.height);
+    const width=Math.round(bitmap.width*scale);const height=Math.round(bitmap.height*scale);
+    context.imageSmoothingEnabled=true;context.imageSmoothingQuality='high';context.drawImage(bitmap,(size-width)/2,(size-height)/2,width,height);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',.88));
+    result=blob;if(blob.size<=500*1024)break;
+  }
+  bitmap.close();
+  return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(result)});
+}
 
 function renderUpcoming(){
   const today=new Date().toISOString().slice(0,10);
@@ -67,11 +82,23 @@ async function loadProfile(){
   document.querySelectorAll('[data-profile-status]').forEach(item=>item.textContent=profile.logo_data&&profile.niche?'Completo':'Pendente');
 }
 
+async function loadTestimonial(){
+  const form=document.querySelector('.testimonial-form');if(!form)return;
+  const response=await fetch('/api/testimonial');if(!response.ok)throw new Error('Não foi possível carregar o depoimento.');
+  const {testimonial}=await response.json();form.elements.content.value=testimonial.content||'';form.querySelector('[data-testimonial-count]').textContent=String(form.elements.content.value.length);
+}
+
 document.querySelectorAll('.profile-form').forEach(form=>{
   const fileInput=form.elements.logo;
-  fileInput.addEventListener('change',()=>{const file=fileInput.files[0];if(!file)return;const feedback=form.querySelector('.form-feedback');if(file.size>500*1024||!['image/png','image/jpeg','image/webp'].includes(file.type)){feedback.textContent='Escolha uma imagem PNG, JPG ou WebP de até 500 KB.';fileInput.value='';return}const reader=new FileReader();reader.onload=()=>{state.logoData=reader.result;setLogo(form.querySelector('[data-logo-preview]'),state.logoData,form.elements.companyName.value)};reader.readAsDataURL(file)});
+  fileInput.addEventListener('change',async()=>{const file=fileInput.files[0];if(!file)return;const feedback=form.querySelector('.form-feedback');if(file.size>8*1024*1024||!['image/png','image/jpeg','image/webp'].includes(file.type)){feedback.textContent='Escolha uma imagem PNG, JPG ou WebP de até 8 MB.';fileInput.value='';return}feedback.textContent='Ajustando largura e altura do logo…';try{state.logoData=await normalizeLogo(file);setLogo(form.querySelector('[data-logo-preview]'),state.logoData,form.elements.companyName.value);feedback.textContent='Logo ajustado para o formato quadrado.'}catch{feedback.textContent='Não foi possível processar esta imagem.';fileInput.value=''}});
   form.addEventListener('submit',async event=>{event.preventDefault();const feedback=form.querySelector('.form-feedback');const button=form.querySelector('.primary-action');button.disabled=true;feedback.textContent='Salvando…';try{const response=await fetch('/api/profile',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({companyName:form.elements.companyName.value,niche:form.elements.niche.value,logoData:state.logoData})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.message||'Não foi possível salvar.');feedback.textContent=data.message;state.logoData=null;await Promise.all([loadProfile(),loadPublicData()])}catch(error){feedback.textContent=error.message}finally{button.disabled=false}});
 });
+
+const testimonialForm=document.querySelector('.testimonial-form');
+if(testimonialForm){
+  const textarea=testimonialForm.elements.content;const count=testimonialForm.querySelector('[data-testimonial-count]');textarea.addEventListener('input',()=>count.textContent=String(textarea.value.length));
+  testimonialForm.addEventListener('submit',async event=>{event.preventDefault();const button=testimonialForm.querySelector('.primary-action');const feedback=testimonialForm.querySelector('.form-feedback');button.disabled=true;feedback.textContent='Publicando…';try{const response=await fetch('/api/testimonial',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({content:textarea.value})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.message||'Não foi possível publicar.');feedback.textContent=data.message}catch(error){feedback.textContent=error.message}finally{button.disabled=false}});
+}
 
 const eventForm=document.querySelector('.event-form');
 function resetEventForm(){if(!eventForm)return;eventForm.reset();eventForm.elements.id.value='';eventForm.querySelector('[data-event-form-title]').textContent='Novo evento';eventForm.querySelector('[data-cancel-edit]').hidden=true;eventForm.querySelector('.primary-action').textContent='Salvar evento'}
@@ -88,7 +115,7 @@ async function start(){
     const response=await fetch('/api/session',{headers:{accept:'application/json'}});if(response.status===401){location.replace('/?login=1');return}if(!response.ok)throw new Error('O serviço de autenticação está indisponível.');
     const {user}=await response.json();if(expectedRole==='admin'&&user.role!=='admin'){location.replace('/partner.html');return}if(expectedRole==='partner'&&user.role==='admin'){location.replace('/dashboard.html');return}
     document.querySelector('[data-user-name]').textContent=user.login;document.querySelector('[data-user-role]').textContent=user.role==='admin'?'Administrador':'Parceiro';document.querySelectorAll('[data-user-greeting]').forEach(item=>item.textContent=user.login);
-    await Promise.all([loadPublicData(),loadProfile()]);body.classList.remove('dashboard-loading');showView(location.hash.slice(1)||'inicio',false);
+    await Promise.all([loadPublicData(),loadProfile(),loadTestimonial()]);body.classList.remove('dashboard-loading');showView(location.hash.slice(1)||'inicio',false);
   }catch(error){body.classList.remove('dashboard-loading');errorPanel.hidden=false;errorPanel.querySelector('span').textContent=error.message}
 }
 start();
