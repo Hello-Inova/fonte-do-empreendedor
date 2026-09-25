@@ -35,6 +35,26 @@
     gap: 10px;
   }
 
+  .site-header::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgba(7,7,8,.48);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .28s ease, visibility .28s;
+  }
+
+  .site-header.nav-open::after {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
   .site-header .brand {
     margin-right: auto;
   }
@@ -47,25 +67,27 @@
 
   .site-header .site-nav {
     position: fixed;
-    inset: 72px 0 0;
+    inset: 0 0 0 auto;
+    width: 70vw;
+    height: 100vh;
+    height: 100dvh;
     z-index: 11;
     display: flex;
     align-items: stretch;
     flex-direction: column;
     gap: 0;
-    padding: 28px 20px 36px;
+    padding: 96px 20px 36px;
     overflow-y: auto;
-    background: rgba(7,7,8,.98);
-    backdrop-filter: blur(22px);
-    opacity: 0;
+    background: #0a0a0b;
+    border-left: 1px solid rgba(241,199,91,.24);
+    box-shadow: -24px 0 70px rgba(0,0,0,.38);
     visibility: hidden;
-    transform: translateY(-12px);
+    transform: translateX(100%);
     pointer-events: none;
-    transition: opacity .25s ease, transform .25s ease, visibility .25s;
+    transition: transform .32s cubic-bezier(.22,.8,.25,1), visibility .32s;
   }
 
   .site-header.nav-open .site-nav {
-    opacity: 1;
     visibility: visible;
     transform: none;
     pointer-events: auto;
@@ -154,6 +176,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .site-header::after,
   .site-header .site-nav,
   .nav-toggle span {
     transition: none;

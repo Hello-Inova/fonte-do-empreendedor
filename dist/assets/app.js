@@ -40,18 +40,21 @@ const siteHeader=document.querySelector('.site-header');
 const navToggle=document.querySelector('.nav-toggle');
 const siteNav=document.querySelector('.site-nav');
 if(siteHeader&&navToggle&&siteNav){
-  function closeSiteNav(){
-    siteHeader.classList.remove('nav-open');
-    document.body.classList.remove('nav-open');
-    navToggle.setAttribute('aria-expanded','false');
-    navToggle.setAttribute('aria-label','Abrir menu');
-  }
-  navToggle.addEventListener('click',()=>{
-    const open=siteHeader.classList.toggle('nav-open');
+  const blockedWhileMenuOpen=[document.querySelector('main'),document.querySelector('footer'),document.querySelector('.site-header > .brand'),document.querySelector('.access-trigger')].filter(Boolean);
+  function setSiteNavState(open){
+    siteHeader.classList.toggle('nav-open',open);
     document.body.classList.toggle('nav-open',open);
+    blockedWhileMenuOpen.forEach(element=>{element.inert=open});
     navToggle.setAttribute('aria-expanded',String(open));
     navToggle.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+  }
+  function closeSiteNav(){
+    setSiteNavState(false);
+  }
+  navToggle.addEventListener('click',()=>{
+    setSiteNavState(!siteHeader.classList.contains('nav-open'));
   });
+  siteHeader.addEventListener('click',event=>{if(event.target===siteHeader&&siteHeader.classList.contains('nav-open'))closeSiteNav()});
   siteNav.addEventListener('click',event=>{if(event.target.closest('a'))closeSiteNav()});
   addEventListener('keydown',event=>{if(event.key==='Escape'&&siteHeader.classList.contains('nav-open')){closeSiteNav();navToggle.focus()}});
   addEventListener('resize',()=>{if(innerWidth>900)closeSiteNav()});
