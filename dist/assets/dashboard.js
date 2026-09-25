@@ -6,7 +6,9 @@ const navLinks=[...document.querySelectorAll('[data-view-link]')];
 const views=[...document.querySelectorAll('[data-view]')];
 const errorPanel=document.querySelector('.dashboard-error');
 const months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-const state={events:[],partners:[],profile:null,logoData:null,year:new Date().getFullYear()};
+const weekDays=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const today=new Date();
+const state={events:[],partners:[],profile:null,logoData:null,year:today.getFullYear(),month:today.getMonth()};
 
 const escapeHtml=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const dateFrom=value=>new Date(`${String(value).slice(0,10)}T12:00:00`);
@@ -58,9 +60,16 @@ function prepareYearSelectors(){
   document.querySelectorAll('[data-year-select]').forEach(select=>{select.innerHTML=[...years].sort().map(year=>`<option value="${year}" ${year===state.year?'selected':''}>${year}</option>`).join('');select.onchange=()=>{state.year=Number(select.value);document.querySelectorAll('[data-year-select]').forEach(other=>other.value=String(state.year));renderCalendars()}});
 }
 function renderCalendars(){
-  document.querySelectorAll('[data-calendar-year]').forEach(item=>item.textContent=String(state.year));
-  document.querySelectorAll('[data-calendar]').forEach(calendar=>{calendar.innerHTML=months.map((month,index)=>{const events=state.events.filter(event=>dateFrom(event.startDate).getFullYear()===state.year&&dateFrom(event.startDate).getMonth()===index);return `<section class="calendar-month"><h4>${month}</h4>${events.length?events.map(event=>`<article class="month-event"><strong>${dateFrom(event.startDate).getDate()} · ${escapeHtml(event.title)}</strong><small>${escapeHtml([event.timeLabel,event.location].filter(Boolean).join(' · '))}</small></article>`).join(''):'<span class="month-empty">Sem programação</span>'}</section>`}).join('')});
+  document.querySelectorAll('[data-calendar-year]').forEach(item=>item.textContent=`${months[state.month]} ${state.year}`);
+  const firstDay=new Date(state.year,state.month,1).getDay();const totalDays=new Date(state.year,state.month+1,0).getDate();const cells=[];
+  for(let empty=0;empty<firstDay;empty++)cells.push('<span class="portal-calendar-day is-empty" aria-hidden="true"></span>');
+  for(let day=1;day<=totalDays;day++){
+    const dateKey=`${state.year}-${String(state.month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;const events=state.events.filter(event=>String(event.startDate).slice(0,10)===dateKey);
+    cells.push(`<span class="portal-calendar-day${events.length?' has-event':''}"><b>${day}</b>${events.map(event=>`<span class="portal-day-event" title="${escapeHtml(event.title)}"><i></i>${escapeHtml(event.title)}</span>`).join('')}</span>`);
+  }
+  document.querySelectorAll('[data-calendar]').forEach(calendar=>{calendar.innerHTML=`<div class="portal-calendar-toolbar"><button type="button" data-portal-calendar-prev aria-label="Ver mês anterior">←</button><h4>${months[state.month]} <span>${state.year}</span></h4><button type="button" data-portal-calendar-next aria-label="Ver próximo mês">→</button></div><div class="portal-week-row">${weekDays.map(day=>`<span>${day}</span>`).join('')}</div><div class="portal-month-grid">${cells.join('')}</div>`;calendar.querySelector('[data-portal-calendar-prev]').onclick=()=>changeCalendarMonth(-1);calendar.querySelector('[data-portal-calendar-next]').onclick=()=>changeCalendarMonth(1)});
 }
+function changeCalendarMonth(delta){const target=new Date(state.year,state.month+delta,1);state.year=target.getFullYear();state.month=target.getMonth();document.querySelectorAll('[data-year-select]').forEach(select=>{if(![...select.options].some(option=>Number(option.value)===state.year))select.add(new Option(String(state.year),String(state.year)));select.value=String(state.year)});renderCalendars()}
 
 function renderEventManagement(){
   const container=document.querySelector('[data-event-management]');if(!container)return;

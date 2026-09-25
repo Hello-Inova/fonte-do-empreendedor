@@ -1,25 +1,34 @@
 const publicMonths=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const weekDays=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-const publicState={events:[],partners:[],testimonials:[],year:new Date().getFullYear(),partnerIndex:0,testimonialIndex:0};
+const publicToday=new Date();
+const publicState={events:[],partners:[],testimonials:[],year:publicToday.getFullYear(),month:publicToday.getMonth(),partnerIndex:0,testimonialIndex:0};
 const publicEscape=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const publicDate=value=>new Date(`${String(value).slice(0,10)}T12:00:00`);
 const publicInitials=name=>String(name||'AF').split(/\s+/).slice(0,2).map(part=>part[0]).join('').toUpperCase();
 
 function renderPublicCalendar(){
   const calendar=document.querySelector('[data-public-calendar]');
-  calendar.innerHTML=publicMonths.map((month,monthIndex)=>{
-    const firstDay=new Date(publicState.year,monthIndex,1).getDay();
-    const totalDays=new Date(publicState.year,monthIndex+1,0).getDate();
-    const cells=[];
-    for(let empty=0;empty<firstDay;empty++)cells.push('<span class="calendar-day is-empty" aria-hidden="true"></span>');
-    for(let day=1;day<=totalDays;day++){
-      const dateKey=`${publicState.year}-${String(monthIndex+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-      const events=publicState.events.filter(event=>event.startDate.slice(0,10)===dateKey);
-      const title=events.map(event=>event.title).join(', ');
-      cells.push(`<span class="calendar-day${events.length?' has-event':''}" ${title?`title="${publicEscape(title)}"`:''}><b>${day}</b>${events.length?`<i></i><small>${publicEscape(events[0].title)}</small>`:''}</span>`);
-    }
-    return `<article class="public-month"><h3>${month}</h3><div class="week-row">${weekDays.map(day=>`<span>${day}</span>`).join('')}</div><div class="month-grid">${cells.join('')}</div></article>`;
-  }).join('');
+  const firstDay=new Date(publicState.year,publicState.month,1).getDay();
+  const totalDays=new Date(publicState.year,publicState.month+1,0).getDate();
+  const cells=[];
+  for(let empty=0;empty<firstDay;empty++)cells.push('<span class="calendar-day is-empty" aria-hidden="true"></span>');
+  for(let day=1;day<=totalDays;day++){
+    const dateKey=`${publicState.year}-${String(publicState.month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const events=publicState.events.filter(event=>event.startDate.slice(0,10)===dateKey);
+    const title=events.map(event=>event.title).join(', ');
+    cells.push(`<span class="calendar-day${events.length?' has-event':''}" ${title?`title="${publicEscape(title)}"`:''}><b>${day}</b>${events.length?`<i></i><small>${publicEscape(events[0].title)}</small>`:''}</span>`);
+  }
+  calendar.innerHTML=`<article class="public-month"><header class="calendar-toolbar"><button type="button" data-calendar-prev aria-label="Ver mês anterior">←</button><h3>${publicMonths[publicState.month]} <span>${publicState.year}</span></h3><button type="button" data-calendar-next aria-label="Ver próximo mês">→</button></header><div class="week-row">${weekDays.map(day=>`<span>${day}</span>`).join('')}</div><div class="month-grid">${cells.join('')}</div></article>`;
+  calendar.querySelector('[data-calendar-prev]').addEventListener('click',()=>changePublicMonth(-1));
+  calendar.querySelector('[data-calendar-next]').addEventListener('click',()=>changePublicMonth(1));
+}
+
+function changePublicMonth(delta){
+  const target=new Date(publicState.year,publicState.month+delta,1);
+  publicState.year=target.getFullYear();publicState.month=target.getMonth();
+  const select=document.querySelector('[data-public-year]');
+  if(![...select.options].some(option=>Number(option.value)===publicState.year))select.add(new Option(String(publicState.year),String(publicState.year)));
+  select.value=String(publicState.year);renderPublicCalendar();
 }
 
 function renderPublicPartners(){

@@ -1,0 +1,130 @@
+.home-calendar {
+  margin-top: 16px;
+}
+
+.annual-calendar {
+  display: block;
+  margin-top: 20px;
+}
+
+.portal-calendar-toolbar {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.portal-calendar-toolbar h4 {
+  margin: 0;
+  text-align: center;
+  color: var(--gold);
+  font: 600 17px "Manrope", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.portal-calendar-toolbar h4 span {
+  color: var(--muted);
+}
+
+.portal-calendar-toolbar button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.portal-calendar-toolbar button:hover,
+.portal-calendar-toolbar button:focus-visible {
+  background: var(--gold);
+  color: var(--ink);
+  outline: none;
+}
+
+.portal-week-row,
+.portal-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.portal-week-row {
+  margin-bottom: 7px;
+}
+
+.portal-week-row > span {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.portal-calendar-day {
+  display: block;
+  min-height: 78px;
+  padding: 8px 6px;
+  border: 1px solid rgba(255, 255, 255, .07);
+  background: #0d0d0f;
+  overflow: hidden;
+}
+
+.portal-calendar-day.is-empty {
+  border-color: transparent;
+  background: transparent;
+}
+
+.portal-calendar-day > b {
+  font: 500 12px "DM Sans", sans-serif;
+  color: #8f8b83;
+}
+
+.portal-calendar-day.has-event {
+  border-color: rgba(241, 199, 91, .45);
+  background: rgba(241, 199, 91, .07);
+}
+
+.portal-calendar-day.has-event > b {
+  color: var(--gold);
+}
+
+.portal-day-event {
+  display: block;
+  margin-top: 5px;
+  color: #d7d3cb;
+  font-size: 9px;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.portal-day-event i {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  vertical-align: middle;
+}
+
+@media (max-width: 700px) {
+  .portal-week-row,
+  .portal-month-grid {
+    gap: 3px;
+  }
+
+  .portal-calendar-day {
+    min-height: 52px;
+    padding: 5px 3px;
+  }
+
+  .portal-day-event {
+    font-size: 8px;
+  }
+}
