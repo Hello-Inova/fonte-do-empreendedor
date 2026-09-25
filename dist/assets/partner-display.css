@@ -1,0 +1,106 @@
+/* Partner information is presented without card chrome. */
+.public-partner-track {
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.public-partner-card {
+  flex: 0 0 calc((100% - clamp(56px, 10vw, 144px)) / 3);
+  min-height: 0;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  align-items: center;
+  text-align: center;
+}
+
+.public-partner-logo,
+.portal-partner-logo,
+.logo-preview {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+}
+
+.public-partner-logo {
+  width: min(150px, 100%);
+  height: 120px;
+  padding: 12px;
+  border: 1px solid rgba(7, 7, 8, .1);
+  border-radius: 14px;
+}
+
+.public-partner-logo img,
+.portal-partner-logo img,
+.logo-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.public-partner-card h4 {
+  margin: 22px 0 7px;
+}
+
+.public-partner-card p {
+  margin: 0;
+  max-width: 260px;
+}
+
+.portal-partners {
+  gap: 0;
+}
+
+.portal-partner {
+  min-height: 0;
+  padding: 26px 22px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  align-items: center;
+  text-align: center;
+}
+
+.portal-partner-logo {
+  width: 132px;
+  height: 104px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.portal-partner h3 {
+  margin: 20px 0 7px;
+}
+
+.portal-partner p {
+  margin: 0;
+}
+
+.logo-preview {
+  padding: 10px;
+  border-radius: 12px;
+}
+
+@media (max-width: 1050px) {
+  .public-partner-card {
+    flex-basis: calc((100% - clamp(28px, 5vw, 72px)) / 2);
+  }
+}
+
+@media (max-width: 760px) {
+  .public-partner-card {
+    flex-basis: 72%;
+  }
+}
+
+@media (max-width: 520px) {
+  .public-partner-card {
+    flex-basis: 86%;
+  }
+}
