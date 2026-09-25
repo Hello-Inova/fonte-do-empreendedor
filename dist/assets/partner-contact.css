@@ -1,0 +1,51 @@
+.profile-contacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.profile-contacts > div {
+  grid-column: 1 / -1;
+}
+
+.profile-contacts h3 {
+  margin: 8px 0 0;
+  font: 600 21px "Manrope", sans-serif;
+}
+
+.profile-contacts label {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  color: #d5d1c9;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-contacts input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #0b0b0c;
+  color: #f7f4ed;
+  padding: 13px;
+  font: 14px "DM Sans", sans-serif;
+  outline: none;
+}
+
+.profile-contacts input:focus {
+  border-color: var(--gold);
+}
+
+.profile-contacts small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+@media (max-width: 820px) {
+  .profile-contacts {
+    grid-template-columns: 1fr;
+  }
+}

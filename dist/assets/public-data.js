@@ -5,6 +5,12 @@ const publicState={events:[],partners:[],testimonials:[],year:publicToday.getFul
 const publicEscape=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
 const publicDate=value=>new Date(`${String(value).slice(0,10)}T12:00:00`);
 const publicInitials=name=>String(name||'AF').split(/\s+/).slice(0,2).map(part=>part[0]).join('').toUpperCase();
+function publicSafeUrl(value){try{const url=new URL(String(value||''));return ['http:','https:'].includes(url.protocol)?url.toString():''}catch{return ''}}
+function partnerContactActions(partner){
+  const whatsapp=String(partner.whatsapp||'').replace(/\D/g,'');const instagram=publicSafeUrl(partner.instagramUrl);const website=publicSafeUrl(partner.websiteUrl);
+  const action=(href,label)=>href?`<a href="${publicEscape(href)}" target="_blank" rel="noopener noreferrer">${label}<span>↗</span></a>`:`<span class="is-disabled" aria-disabled="true">${label}</span>`;
+  return `<div class="partner-actions" aria-label="Contatos de ${publicEscape(partner.companyName)}">${action(whatsapp?`https://wa.me/${whatsapp}`:'','WhatsApp')}${action(instagram,'Instagram')}${action(website,'Site')}</div>`;
+}
 
 function renderPublicCalendar(){
   const calendar=document.querySelector('[data-public-calendar]');
@@ -33,7 +39,7 @@ function changePublicMonth(delta){
 
 function renderPublicPartners(){
   const track=document.querySelector('[data-public-partners]');
-  track.innerHTML=publicState.partners.length?publicState.partners.map(partner=>`<article class="public-partner-card"><div class="public-partner-logo">${partner.logoData?`<img src="${partner.logoData}" alt="Logo de ${publicEscape(partner.companyName)}">`:`<span>${publicEscape(publicInitials(partner.companyName))}</span>`}</div><h4>${publicEscape(partner.companyName)}</h4><p>${publicEscape(partner.niche||'Parceiro da Fonte do Empreendedor')}</p></article>`).join(''):'<article class="public-partner-empty">Os novos parceiros aparecerão aqui.</article>';
+  track.innerHTML=publicState.partners.length?publicState.partners.map(partner=>`<article class="public-partner-card"><div class="public-partner-logo">${partner.logoData?`<img src="${partner.logoData}" alt="Logo de ${publicEscape(partner.companyName)}">`:`<span>${publicEscape(publicInitials(partner.companyName))}</span>`}</div><h4>${publicEscape(partner.companyName)}</h4><p>${publicEscape(partner.niche||'Parceiro da Fonte do Empreendedor')}</p>${partnerContactActions(partner)}</article>`).join(''):'<article class="public-partner-empty">Os novos parceiros aparecerão aqui.</article>';
   adaptPartnerLogos(track);
   movePartners(0);
 }

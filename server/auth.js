@@ -29,8 +29,14 @@ export async function ensureAppSchema(sql){
     company_name TEXT NOT NULL,
     niche TEXT NOT NULL DEFAULT '',
     logo_data TEXT,
+    whatsapp TEXT NOT NULL DEFAULT '',
+    instagram_url TEXT NOT NULL DEFAULT '',
+    website_url TEXT NOT NULL DEFAULT '',
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )`;
+  await sql`ALTER TABLE partner_profiles ADD COLUMN IF NOT EXISTS whatsapp TEXT NOT NULL DEFAULT ''`;
+  await sql`ALTER TABLE partner_profiles ADD COLUMN IF NOT EXISTS instagram_url TEXT NOT NULL DEFAULT ''`;
+  await sql`ALTER TABLE partner_profiles ADD COLUMN IF NOT EXISTS website_url TEXT NOT NULL DEFAULT ''`;
   await sql`CREATE TABLE IF NOT EXISTS agenda_events (
     id UUID PRIMARY KEY,
     title TEXT NOT NULL,
