@@ -36,6 +36,13 @@ requestAnimationFrame(tick);
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.18});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+const pillarGrid=document.querySelector('.partner-grid');
+if(pillarGrid){
+  const movePillar=direction=>{const card=pillarGrid.querySelector('.partner-card');if(!card)return;const gap=parseFloat(getComputedStyle(pillarGrid).gap)||0;pillarGrid.scrollBy({left:direction*(card.getBoundingClientRect().width+gap),behavior:reduced?'auto':'smooth'})};
+  document.querySelector('[data-pillar-prev]')?.addEventListener('click',()=>movePillar(-1));
+  document.querySelector('[data-pillar-next]')?.addEventListener('click',()=>movePillar(1));
+}
+
 const siteHeader=document.querySelector('.site-header');
 const navToggle=document.querySelector('.nav-toggle');
 const siteNav=document.querySelector('.site-nav');

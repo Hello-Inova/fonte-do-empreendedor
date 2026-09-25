@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow">
   <title>Painel administrativo — A Fonte do Empreendedor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="assets/favicon-redondo.png"><link rel="stylesheet" href="assets/dashboard.css"><link rel="stylesheet" href="assets/portal.css"><link rel="stylesheet" href="assets/calendar.css"><link rel="stylesheet" href="assets/partner-display.css">
+  <link rel="icon" type="image/png" href="assets/favicon-redondo.png"><link rel="stylesheet" href="assets/dashboard.css"><link rel="stylesheet" href="assets/portal.css"><link rel="stylesheet" href="assets/calendar.css"><link rel="stylesheet" href="assets/partner-display.css"><link rel="stylesheet" href="assets/portal-event.css">
 </head>
 <body class="dashboard-loading" data-portal-role="admin">
   <div class="mobile-overlay" data-close-menu></div>
@@ -19,6 +19,7 @@
     <div class="sidebar-footer"><span class="status-dot"></span><span>Neon conectado</span></div>
   </aside>
   <main class="dashboard-main">
+    <aside class="portal-event-alert" data-portal-event-alert hidden><p><strong>Próximo encontro:</strong> <span data-portal-event-text></span></p><a data-next-register href="/inscricao.html?source=portal">Inscrever-se →</a></aside>
     <header class="dashboard-topbar">
       <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="dashboard-menu"><span></span><span></span><span></span></button>
       <div><p>Área administrativa</p><h1 data-page-title>Visão geral</h1></div>
@@ -26,7 +27,7 @@
     </header>
     <section class="dashboard-content portal-view" id="inicio" data-view>
       <div class="welcome-panel"><div><p class="eyebrow">Painel da comunidade</p><h2>Olá, <span data-user-greeting>Administrador</span>.</h2><p>Organize a programação anual e acompanhe a rede de parceiros em um só lugar.</p></div><a href="/#programacao">Ver site público <span>↗</span></a></div>
-      <div class="metric-grid"><article><span>Parceiros</span><strong data-partner-count>—</strong><small>Perfis cadastrados</small></article><article><span>Eventos</span><strong data-event-count>—</strong><small>Na programação</small></article><article><span>Próximo encontro</span><strong class="metric-date" data-next-event>—</strong><small data-next-event-title>Agenda aberta</small></article></div>
+      <div class="metric-grid"><article><span>Parceiros</span><strong data-partner-count>—</strong><small>Perfis cadastrados</small></article><article><span>Eventos</span><strong data-event-count>—</strong><small>Na programação</small></article><article><span>Próximo encontro</span><strong class="metric-date" data-next-event>—</strong><small data-next-event-title>Agenda aberta</small><a class="metric-confirm" data-next-register href="/inscricao.html?source=portal" hidden>Inscrever-se →</a></article></div>
       <div class="dashboard-grid"><section class="dashboard-card"><div class="card-head"><div><p>Próximos encontros</p><h3>Agenda da Fonte</h3></div><button type="button" data-go-view="agenda">Gerenciar</button></div><div class="compact-events" data-upcoming-events></div></section><section class="dashboard-card activity-card"><div class="card-head"><div><p>Atividade</p><h3>Estrutura conectada</h3></div></div><ol><li><span></span><div><strong>Agenda compartilhada</strong><small>Site e parceiros</small></div></li><li><span></span><div><strong>Cadastros ativos</strong><small>Perfis no Neon</small></div></li><li><span></span><div><strong>Permissões protegidas</strong><small>Somente admin edita eventos</small></div></li></ol></section></div>
       <section class="dashboard-card calendar-card home-calendar"><div class="card-head"><div><p>Calendário</p><h3 data-calendar-year></h3></div><select data-year-select aria-label="Escolher ano"></select></div><div class="annual-calendar" data-calendar></div></section>
     </section>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,follow">
+  <title>Inscrição — A Fonte do Empreendedor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-redondo.png"><link rel="stylesheet" href="assets/event-registration.css">
+</head>
+<body>
+  <header class="registration-header"><a href="/" aria-label="Voltar ao site"><img src="assets/logo-oficial.png" alt=""><span>A Fonte<small>do Empreendedor</small></span></a><a href="/">Voltar ao site</a></header>
+  <main class="registration-layout">
+    <section class="event-summary"><p class="kicker">Próximo encontro</p><div class="event-date"><strong data-event-day>—</strong><span data-event-month>---</span></div><h1 data-event-title>Carregando evento…</h1><p data-event-description></p><dl><div><dt>Data</dt><dd data-event-full-date>—</dd></div><div><dt>Horário</dt><dd data-event-time>—</dd></div><div><dt>Local</dt><dd data-event-location>—</dd></div></dl><blockquote>“Prepare-se para viver propósito em movimento.”</blockquote></section>
+    <section class="registration-panel">
+      <div class="form-heading"><p>Confirme sua participação</p><h2 data-form-title>Faça sua inscrição</h2><span>Preencha os dados abaixo. Os campos de contato são verificados para evitar inscrições duplicadas.</span></div>
+      <div class="account-gate" data-account-gate hidden><strong>Este acesso pertence a um usuário cadastrado.</strong><p>Parceiros e administradores devem confirmar presença pela área do usuário.</p><a data-account-link href="/?login=1">Acessar minha área <span>→</span></a></div>
+      <form class="event-registration-form" novalidate>
+        <div class="attendees-block"><div class="attendees-heading"><div><span>Participantes</span><small data-attendee-help>Informe o nome completo.</small></div><button type="button" data-add-attendee hidden>+ Adicionar pessoa</button></div><div class="attendee-list" data-attendee-list><label>Nome completo<input name="attendeeName" autocomplete="name" maxlength="100" required><small class="field-error" data-error-for="fullName"></small></label></div></div>
+        <div class="form-grid"><label>Nome da empresa<input name="companyName" maxlength="120" autocomplete="organization" required><small class="field-error" data-error-for="companyName"></small></label><label>Ramo de atuação<input name="industry" maxlength="120" required placeholder="Ex.: Tecnologia, alimentação"><small class="field-error" data-error-for="industry"></small></label><label>CNPJ<input name="cnpj" inputmode="numeric" maxlength="18" required placeholder="00.000.000/0000-00"><small class="field-error" data-error-for="cnpj"></small></label><label>WhatsApp<input name="whatsapp" type="tel" inputmode="tel" maxlength="16" required placeholder="(00) 00000-0000"><small class="field-error" data-error-for="whatsapp"></small></label><label class="wide">E-mail<input name="email" type="email" maxlength="180" autocomplete="email" required><small class="field-error" data-error-for="email"></small></label></div>
+        <aside class="invite-notice"><span>!</span><p>Após a confirmação, seu convite será gerado. <strong>Salve o arquivo e apresente-o no dia do evento.</strong></p></aside>
+        <button class="registration-submit" type="submit"><span data-submit-label>Inscrever</span><b>→</b></button><p class="form-status" aria-live="polite"></p>
+      </form>
+      <section class="invitation-result" data-invitation hidden><p class="kicker">Inscrição confirmada</p><h2>Seu convite está pronto.</h2><p>Baixe e guarde este convite. Ele deverá ser apresentado no dia do evento.</p><div class="invitation-card"><img src="assets/logo-oficial.png" alt=""><span>Convite oficial</span><h3 data-invite-event></h3><p data-invite-date></p><strong data-invite-name></strong><small data-invite-company></small><code data-invite-code></code></div><button class="download-invite" type="button" data-download-invite>Baixar convite em PNG <span>↓</span></button></section>
+    </section>
+  </main>
+  <script src="assets/event-registration.js" defer></script>
+</body>
+</html>

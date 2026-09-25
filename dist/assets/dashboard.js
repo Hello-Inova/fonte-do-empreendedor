@@ -39,6 +39,8 @@ function renderUpcoming(){
   const upcoming=state.events.filter(event=>event.endDate>=today).slice(0,4);
   document.querySelectorAll('[data-upcoming-events]').forEach(container=>{container.innerHTML=upcoming.length?upcoming.map(event=>`<article class="compact-event"><time datetime="${escapeHtml(event.startDate)}">${dateFrom(event.startDate).getDate()}<small>${months[dateFrom(event.startDate).getMonth()].slice(0,3)}</small></time><div><h4>${escapeHtml(event.title)}</h4><p>${escapeHtml([event.timeLabel,event.location].filter(Boolean).join(' · ')||fullDate(event.startDate))}</p></div></article>`).join(''):'<div class="empty-inline">Nenhum evento publicado para os próximos dias.</div>'});
   const next=upcoming[0];document.querySelectorAll('[data-next-event]').forEach(item=>item.textContent=next?shortDate(next.startDate):'—');document.querySelectorAll('[data-next-event-title]').forEach(item=>item.textContent=next?.title||'Agenda aberta');
+  document.querySelectorAll('[data-next-register]').forEach(link=>{link.hidden=!next;if(next)link.href=`/inscricao.html?event=${encodeURIComponent(next.id)}&source=portal`});
+  const eventAlert=document.querySelector('[data-portal-event-alert]');if(eventAlert){eventAlert.hidden=!next;document.querySelector('.dashboard-main').classList.toggle('has-event-alert',Boolean(next));if(next)eventAlert.querySelector('[data-portal-event-text]').textContent=`${next.title} — ${fullDate(next.startDate)}${next.timeLabel?` · ${next.timeLabel}`:''}`}
 }
 
 function prepareYearSelectors(){

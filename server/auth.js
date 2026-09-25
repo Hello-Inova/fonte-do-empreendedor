@@ -54,6 +54,23 @@ export async function ensureAppSchema(sql){
     content TEXT NOT NULL,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )`;
+  await sql`CREATE TABLE IF NOT EXISTS event_registrations (
+    id UUID PRIMARY KEY,
+    event_id UUID NOT NULL REFERENCES agenda_events(id) ON DELETE CASCADE,
+    user_id UUID REFERENCES app_users(id) ON DELETE SET NULL,
+    source TEXT NOT NULL DEFAULT 'public',
+    company_name TEXT NOT NULL,
+    industry TEXT NOT NULL,
+    cnpj TEXT NOT NULL,
+    whatsapp TEXT NOT NULL,
+    email TEXT NOT NULL,
+    attendee_names JSONB NOT NULL DEFAULT '[]'::jsonb,
+    invite_code TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`;
+  await sql`CREATE UNIQUE INDEX IF NOT EXISTS event_registrations_event_email_unique ON event_registrations(event_id, LOWER(email))`;
+  await sql`CREATE UNIQUE INDEX IF NOT EXISTS event_registrations_event_whatsapp_unique ON event_registrations(event_id, whatsapp)`;
+  await sql`CREATE UNIQUE INDEX IF NOT EXISTS event_registrations_event_user_unique ON event_registrations(event_id, user_id) WHERE user_id IS NOT NULL`;
 }
 
 export function hashPassword(password){
