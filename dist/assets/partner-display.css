@@ -69,12 +69,13 @@
 
 .public-partner-card h4 {
   margin: 22px 0 7px;
+  color: #fff;
 }
 
 .public-partner-card p {
   margin: 0;
   max-width: 260px;
-  color: #aaa69e;
+  color: #eeeae2;
   line-height: 1.55;
 }
 
@@ -101,7 +102,7 @@
   border-radius: 999px;
   color: #f7f4ed;
   text-decoration: none;
-  transition: background .2s ease, color .2s ease, border-color .2s ease;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease, filter .2s ease;
 }
 
 .partner-actions svg {
@@ -121,15 +122,36 @@
 
 .partner-actions a:hover,
 .partner-actions a:focus-visible {
-  border-color: var(--gold);
-  background: var(--gold);
-  color: #080809;
+  filter: brightness(1.12);
+  transform: translateY(-2px) scale(1.04);
   outline: none;
 }
 
-.partner-actions .is-disabled {
-  cursor: not-allowed;
-  opacity: .32;
+.partner-actions .is-whatsapp {
+  border-color: #25d366;
+  background: #25d366;
+  color: #071d10;
+}
+
+.partner-actions .is-instagram {
+  border-color: #d62976;
+  background: linear-gradient(135deg, #feda75, #fa7e1e 30%, #d62976 58%, #962fbf 80%, #4f5bd5);
+  color: #fff;
+}
+
+.partner-actions .is-website {
+  border-color: #4b9cff;
+  background: #2477d4;
+  color: #fff;
+}
+
+.partner-contact-empty {
+  margin-top: auto!important;
+  padding-top: 26px;
+  color: #d8d3c9!important;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .portal-partners {
