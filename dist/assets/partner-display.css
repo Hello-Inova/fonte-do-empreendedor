@@ -20,15 +20,15 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: transparent;
+  background: #fff;
+  border-radius: 50%;
 }
 
 .public-partner-logo {
-  width: min(210px, 100%);
-  height: 112px;
-  padding: 4px;
-  border: 0;
-  border-radius: 0;
+  width: 150px;
+  height: 150px;
+  padding: 18px;
+  border: 1px solid rgba(241, 199, 91, .28);
 }
 
 .public-partner-logo img,
@@ -67,11 +67,10 @@
 }
 
 .portal-partner-logo {
-  width: min(210px, 100%);
-  height: 112px;
-  padding: 4px;
-  border: 0;
-  border-radius: 0;
+  width: 150px;
+  height: 150px;
+  padding: 18px;
+  border: 1px solid rgba(241, 199, 91, .28);
 }
 
 .portal-partner h3 {
@@ -83,11 +82,11 @@
 }
 
 .logo-preview {
-  width: min(240px, 100%);
-  height: 140px;
-  padding: 8px;
-  border-radius: 10px;
-  background: #080809;
+  width: 180px;
+  height: 180px;
+  padding: 22px;
+  border-radius: 50%;
+  background: #fff;
 }
 
 @media (max-width: 1050px) {
