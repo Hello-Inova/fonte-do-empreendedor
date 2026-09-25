@@ -42,6 +42,7 @@ function changePublicMonth(delta){
 function renderPublicPartners(){
   const track=document.querySelector('[data-public-partners]');
   track.innerHTML=publicState.partners.length?publicState.partners.map(partner=>`<article class="public-partner-card"><div class="public-partner-logo">${partner.logoData?`<img src="${partner.logoData}" alt="Logo de ${publicEscape(partner.companyName)}">`:`<span>${publicEscape(publicInitials(partner.companyName))}</span>`}</div><h4>${publicEscape(partner.companyName)}</h4><p>${publicEscape(partner.niche||'Parceiro da Fonte do Empreendedor')}</p>${partnerContactActions(partner)}</article>`).join(''):'<article class="public-partner-empty">Os novos parceiros aparecerão aqui.</article>';
+  track.classList.toggle('is-single',publicState.partners.length===1);
   adaptPartnerLogos(track);
   movePartners(0);
 }

@@ -3,6 +3,14 @@
   gap: clamp(28px, 5vw, 72px);
 }
 
+.public-partner-track.is-single {
+  justify-content: center;
+}
+
+.public-partner-track.is-single .public-partner-card {
+  flex-basis: min(100%, 440px);
+}
+
 .public-partner-card {
   flex: 0 0 calc((100% - clamp(56px, 10vw, 144px)) / 3);
   min-height: 410px;
@@ -209,14 +217,69 @@
 }
 
 @media (max-width: 760px) {
+  .partner-showcase {
+    margin-top: 52px;
+  }
+
+  .showcase-head h3 {
+    font-size: clamp(2.4rem, 11vw, 3rem);
+    line-height: 1.06;
+    letter-spacing: -.04em;
+  }
+
+  .public-partner-track {
+    gap: 18px;
+  }
+
   .public-partner-card {
-    flex-basis: 72%;
+    flex-basis: 82%;
+    min-height: 360px;
+    padding: 24px 20px 22px;
+    border-radius: 20px;
+  }
+
+  .public-partner-track.is-single .public-partner-card {
+    flex-basis: min(100%, 390px);
+  }
+
+  .public-partner-logo {
+    width: 118px;
+    height: 118px;
+  }
+
+  .public-partner-card h4 {
+    margin-top: 18px;
+    font-size: 20px;
+  }
+
+  .public-partner-card p {
+    font-size: 14px;
+  }
+
+  .partner-actions {
+    padding-top: 20px;
+  }
+
+  .partner-actions a,
+  .partner-actions .is-disabled {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  .partner-actions img {
+    width: 20px;
+    height: 20px;
   }
 }
 
 @media (max-width: 520px) {
   .public-partner-card {
-    flex-basis: 86%;
+    flex-basis: 90%;
+  }
+
+  .public-partner-track.is-single .public-partner-card {
+    flex-basis: 100%;
   }
 
 }
