@@ -33,8 +33,9 @@ async function normalizePartnerLogo(source){
   const margin=Math.max(2,Math.round(Math.max(bounds.width,bounds.height)*.06));bounds={x:Math.max(0,bounds.x-margin),y:Math.max(0,bounds.y-margin),width:Math.min(workWidth,bounds.x+bounds.width+margin)-Math.max(0,bounds.x-margin),height:Math.min(workHeight,bounds.y+bounds.height+margin)-Math.max(0,bounds.y-margin)};
   const sourceBounds={x:bounds.x/workScale,y:bounds.y/workScale,width:bounds.width/workScale,height:bounds.height/workScale};let result;
   for(const size of [600,480,360]){
-    const canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;const context=canvas.getContext('2d');const padding=Math.round(size*.06);const scale=Math.min((size-padding*2)/sourceBounds.width,(size-padding*2)/sourceBounds.height);const width=Math.round(sourceBounds.width*scale);const height=Math.round(sourceBounds.height*scale);
-    context.imageSmoothingEnabled=true;context.imageSmoothingQuality='high';context.drawImage(bitmap,sourceBounds.x,sourceBounds.y,sourceBounds.width,sourceBounds.height,(size-width)/2,(size-height)/2,width,height);
+    const scale=Math.min(size/sourceBounds.width,size/sourceBounds.height);const contentWidth=Math.max(1,Math.round(sourceBounds.width*scale));const contentHeight=Math.max(1,Math.round(sourceBounds.height*scale));const padding=Math.max(6,Math.round(Math.max(contentWidth,contentHeight)*.04));
+    const canvas=document.createElement('canvas');canvas.width=contentWidth+padding*2;canvas.height=contentHeight+padding*2;const context=canvas.getContext('2d');
+    context.imageSmoothingEnabled=true;context.imageSmoothingQuality='high';context.drawImage(bitmap,sourceBounds.x,sourceBounds.y,sourceBounds.width,sourceBounds.height,padding,padding,contentWidth,contentHeight);
     result=await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',.9));if(result.size<=500*1024)break;
   }
   bitmap.close();const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(result)});if(sourceKey)smartLogoCache.set(sourceKey,dataUrl);return dataUrl;
