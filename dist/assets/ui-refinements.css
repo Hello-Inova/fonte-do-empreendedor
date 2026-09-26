@@ -1,0 +1,247 @@
+/* Compact cards and predictable form controls across the public site and portals. */
+textarea{
+  resize:none!important;
+  height:120px;
+  min-height:120px;
+  max-height:120px;
+}
+
+.testimonial-form textarea{
+  height:180px;
+  min-height:180px;
+  max-height:180px;
+}
+
+.view-heading-with-action{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.event-form-toggle{
+  flex:none;
+  margin-bottom:18px;
+}
+
+.agenda-layout.is-form-collapsed{
+  grid-template-columns:1fr;
+}
+
+.profile-field-wide{
+  grid-column:1/-1;
+}
+
+.welcome-panel{
+  min-height:220px;
+}
+
+.metric-grid article{
+  padding:20px 22px;
+}
+
+.metric-grid strong{
+  margin:12px 0 5px;
+  font-size:36px;
+}
+
+.dashboard-grid .dashboard-card{
+  min-height:300px;
+  padding:22px;
+}
+
+.profile-prompt{
+  padding:28px;
+}
+
+.community-table{
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--panel);
+}
+
+.community-table-head,
+.community-table-row{
+  display:grid;
+  grid-template-columns:minmax(210px,1.25fr) minmax(180px,1fr) minmax(210px,1.15fr) minmax(160px,.9fr) minmax(210px,auto);
+  gap:18px;
+  align-items:center;
+}
+
+.community-table-head{
+  padding:13px 18px;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.community-table-row{
+  min-height:92px;
+  padding:14px 18px;
+  border-bottom:1px solid var(--line);
+}
+
+.community-table-row:last-child{
+  border-bottom:0;
+}
+
+.community-table-row strong,
+.community-table-row small,
+.community-table-row span{
+  display:block;
+  overflow-wrap:anywhere;
+}
+
+.community-table-row strong{
+  font-size:13px;
+}
+
+.community-table-row small,
+.community-table-row span{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+.community-partner{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.community-partner .portal-partner-logo{
+  width:56px;
+  height:56px;
+  flex:0 0 56px;
+}
+
+.community-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.community-actions a{
+  padding:7px 9px;
+  border:1px solid var(--line);
+  color:#d8d4cc;
+  font-size:10px;
+  transition:.2s ease;
+}
+
+.community-actions a:hover,
+.community-actions a:focus-visible{
+  border-color:var(--gold);
+  color:var(--gold);
+  outline:none;
+}
+
+/* Keep the hero artwork visually anchored while the page moves. */
+.hero::before{
+  background-attachment:fixed;
+}
+
+.partner-card{
+  min-height:330px;
+  padding:22px;
+}
+
+.partner-icon{
+  margin:46px 0 24px;
+}
+
+.public-partner-card{
+  min-height:320px;
+  padding:22px 20px;
+}
+
+.public-partner-logo{
+  width:112px;
+  height:112px;
+}
+
+.public-partner-card h4{
+  margin-top:18px;
+}
+
+.partner-actions{
+  padding-top:18px;
+}
+
+.story-track .story-card,
+.story-card{
+  min-height:300px;
+  padding:24px;
+}
+
+@media(max-width:1180px){
+  .community-table-head{
+    display:none;
+  }
+
+  .community-table{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:1px;
+    background:var(--line);
+  }
+
+  .community-table-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:13px;
+    min-height:0;
+    border:0;
+    background:var(--panel);
+    align-content:start;
+  }
+
+  .community-table-row>div:not(.community-partner)::before{
+    content:attr(data-label);
+    display:block;
+    margin-bottom:5px;
+    color:#6f6c67;
+    font-size:9px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+}
+
+@media(max-width:700px){
+  .view-heading-with-action{
+    display:block;
+  }
+
+  .event-form-toggle{
+    width:100%;
+    margin:0 0 20px;
+  }
+
+  .profile-field-wide{
+    grid-column:auto;
+  }
+
+  .welcome-panel{
+    min-height:280px;
+  }
+
+  .community-table{
+    grid-template-columns:1fr;
+  }
+
+  .community-table-row{
+    padding:18px;
+  }
+
+  .public-partner-card{
+    min-height:300px;
+  }
+
+  .hero::before{
+    background-attachment:fixed;
+  }
+}
