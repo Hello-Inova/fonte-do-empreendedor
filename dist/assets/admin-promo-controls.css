@@ -1,0 +1,16 @@
+.promo-manager{display:block!important}
+.promo-manager-heading{margin-bottom:18px}
+.promo-manager-heading strong{font-size:24px}
+.promo-settings{display:grid;gap:10px}
+.promo-setting-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:16px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+.promo-setting-row>div b{display:block;margin-bottom:4px;color:#f4f1eb;font-size:13px}
+.promo-setting-row>div small{display:block}
+.promo-setting-row>strong{margin:0;color:var(--muted);font:600 11px "DM Sans",sans-serif;text-transform:uppercase;letter-spacing:.08em}
+.promo-manager>p{margin-top:9px}
+.promo-setting-row button:disabled{cursor:wait;opacity:.6}
+@media(max-width:700px){
+  .promo-manager{display:block!important}
+  .promo-setting-row{grid-template-columns:minmax(0,1fr) auto}
+  .promo-setting-row>strong{grid-column:1}
+  .promo-setting-row>button{grid-column:2;grid-row:1/3}
+}

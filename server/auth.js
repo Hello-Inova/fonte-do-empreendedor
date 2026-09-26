@@ -78,6 +78,12 @@ export async function ensureAppSchema(sql){
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )`;
   await sql`INSERT INTO app_settings (setting_key,setting_value) VALUES ('event_promo_enabled','true') ON CONFLICT (setting_key) DO NOTHING`;
+  await sql`INSERT INTO app_settings (setting_key,setting_value)
+    SELECT 'event_folder_enabled', COALESCE((SELECT setting_value FROM app_settings WHERE setting_key='event_promo_enabled'),'true')
+    ON CONFLICT (setting_key) DO NOTHING`;
+  await sql`INSERT INTO app_settings (setting_key,setting_value)
+    SELECT 'event_alert_enabled', COALESCE((SELECT setting_value FROM app_settings WHERE setting_key='event_promo_enabled'),'true')
+    ON CONFLICT (setting_key) DO NOTHING`;
 }
 
 export function hashPassword(password){
