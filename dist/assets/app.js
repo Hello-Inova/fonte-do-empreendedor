@@ -46,6 +46,7 @@ if(pillarGrid){
 const siteHeader=document.querySelector('.site-header');
 const navToggle=document.querySelector('.nav-toggle');
 const siteNav=document.querySelector('.site-nav');
+const siteNavClose=document.querySelector('[data-site-nav-close]');
 if(siteHeader&&navToggle&&siteNav){
   const blockedWhileMenuOpen=[document.querySelector('main'),document.querySelector('footer'),document.querySelector('.site-header > .brand'),document.querySelector('.access-trigger')].filter(Boolean);
   function setSiteNavState(open){
@@ -61,6 +62,7 @@ if(siteHeader&&navToggle&&siteNav){
   navToggle.addEventListener('click',()=>{
     setSiteNavState(!siteHeader.classList.contains('nav-open'));
   });
+  siteNavClose?.addEventListener('click',()=>{closeSiteNav();navToggle.focus()});
   siteHeader.addEventListener('click',event=>{if(event.target===siteHeader&&siteHeader.classList.contains('nav-open'))closeSiteNav()});
   siteNav.addEventListener('click',event=>{if(event.target.closest('a'))closeSiteNav()});
   addEventListener('keydown',event=>{if(event.key==='Escape'&&siteHeader.classList.contains('nav-open')){closeSiteNav();navToggle.focus()}});

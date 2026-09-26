@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="assets/layer-fixes.css">
   <link rel="stylesheet" href="assets/event-promo-position.css">
   <link rel="stylesheet" href="assets/ui-refinements.css">
+  <link rel="stylesheet" href="assets/site-navigation-auth.css">
 </head>
 <body>
   <canvas id="three-stage" aria-hidden="true"></canvas>
@@ -34,6 +35,10 @@
       <span>A Fonte<br><small>do Empreendedor</small></span>
     </a>
     <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+      <div class="site-nav-identity">
+        <div class="site-nav-brand"><img src="assets/logo-oficial.png" alt=""><span>A Fonte<small>Menu do site</small></span></div>
+        <button class="site-nav-close" type="button" data-site-nav-close aria-label="Fechar menu">×</button>
+      </div>
       <p class="site-nav-label"><span>Menu</span><strong>Navegue pela Fonte</strong></p>
       <a class="site-nav-home" href="#inicio"><span class="nav-index">01</span><span>Início</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
       <a href="#missao"><span class="nav-index">02</span><span>Missão</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
