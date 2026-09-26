@@ -71,6 +71,13 @@ export async function ensureAppSchema(sql){
   await sql`CREATE UNIQUE INDEX IF NOT EXISTS event_registrations_event_email_unique ON event_registrations(event_id, LOWER(email))`;
   await sql`CREATE UNIQUE INDEX IF NOT EXISTS event_registrations_event_whatsapp_unique ON event_registrations(event_id, whatsapp)`;
   await sql`CREATE UNIQUE INDEX IF NOT EXISTS event_registrations_event_user_unique ON event_registrations(event_id, user_id) WHERE user_id IS NOT NULL`;
+  await sql`CREATE TABLE IF NOT EXISTS app_settings (
+    setting_key TEXT PRIMARY KEY,
+    setting_value TEXT NOT NULL,
+    updated_by UUID REFERENCES app_users(id) ON DELETE SET NULL,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`;
+  await sql`INSERT INTO app_settings (setting_key,setting_value) VALUES ('event_promo_enabled','true') ON CONFLICT (setting_key) DO NOTHING`;
 }
 
 export function hashPassword(password){

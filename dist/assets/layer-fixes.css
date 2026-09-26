@@ -1,0 +1,2 @@
+.site-header{z-index:60}.event-alert-bar{z-index:40}.nav-open .event-alert-bar{z-index:5}
+@media(max-width:900px){.menu-open .sidebar{z-index:70}.menu-open .mobile-overlay{display:block;z-index:65;backdrop-filter:blur(5px)}.menu-open .portal-event-alert,.menu-open .dashboard-topbar{z-index:10}}

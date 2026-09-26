@@ -33,6 +33,22 @@ function validation(item){
   return fields;
 }
 
+async function admin(request,sql){const user=await authenticatedUser(request,sql);return user?.role==='admin'?user:null}
+
+export async function GET(request){
+  try{
+    const sql=database();await ensureAppSchema(sql);const user=await admin(request,sql);if(!user)return json({message:'Acesso restrito ao administrador.'},403);
+    const registrations=await sql`SELECT r.id,r.event_id AS "eventId",e.title AS "eventTitle",e.start_date::text AS "eventDate",r.company_name AS "companyName",r.industry,r.cnpj,r.whatsapp,r.email,r.attendee_names AS "attendeeNames",r.invite_code AS "inviteCode",r.source,r.created_at::text AS "createdAt",u.login AS "userLogin" FROM event_registrations r JOIN agenda_events e ON e.id=r.event_id LEFT JOIN app_users u ON u.id=r.user_id ORDER BY e.start_date DESC,r.created_at DESC`;
+    return json({registrations});
+  }catch(error){console.error('registrations_get_failed',error instanceof Error?error.message:error);return json({message:'Não foi possível carregar as inscrições.'},500)}
+}
+
+export async function DELETE(request){
+  try{
+    const sql=database();await ensureAppSchema(sql);const user=await admin(request,sql);if(!user)return json({message:'Acesso restrito ao administrador.'},403);const {id}=await request.json();if(!validId(id))return json({message:'Inscrição não informada.'},400);const removed=await sql`DELETE FROM event_registrations WHERE id=${String(id)} RETURNING id`;if(!removed.length)return json({message:'Inscrição não encontrada.'},404);return json({ok:true,message:'Inscrição cancelada.'});
+  }catch(error){console.error('registration_delete_failed',error instanceof Error?error.message:error);return json({message:'Não foi possível cancelar a inscrição.'},500)}
+}
+
 export async function POST(request){
   try{
     const sql=database();await ensureAppSchema(sql);
