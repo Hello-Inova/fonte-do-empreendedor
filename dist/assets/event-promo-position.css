@@ -1,0 +1,28 @@
+.event-alert-bar{
+  top:auto;
+  bottom:0;
+  box-shadow:0 -12px 30px rgba(0,0,0,.2);
+}
+
+body.event-alert-visible{
+  padding-bottom:52px;
+}
+
+.event-alert-visible .hero{
+  padding-top:150px;
+}
+
+@media(max-width:900px){
+  .event-alert-bar{
+    top:auto;
+    bottom:0;
+  }
+
+  body.event-alert-visible{
+    padding-bottom:64px;
+  }
+
+  .event-alert-visible .hero{
+    padding-top:110px;
+  }
+}
